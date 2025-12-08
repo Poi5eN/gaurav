@@ -162,51 +162,36 @@ const ServiceModal = ({ service, onClose }) => {
 
 const ServiceCard = ({ index, title, icon, onClick }) => (
   <Tilt className="xs:w-[250px] w-full">
-  <motion.div
-    variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-    className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card cursor-pointer group"
-    onClick={onClick}
-  >
-    <div
-      options={{
-        max: 45,
-        scale: 1,
-        speed: 450,
-      }}
-      className="relative bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col overflow-hidden"
+    <motion.div
+      variants={fadeIn("right", "spring", index * 0.5, 0.75)}
+      className="w-full p-[1px] rounded-[20px] shadow-card cursor-pointer group transition-all duration-300 hover:shadow-neon"
+      onClick={onClick}
     >
-      {/* Rotating background */}
-      <motion.div
-        className="absolute inset-0 rounded-[20px] bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 opacity-20"
-        animate={{ rotate: 360 }}
-        transition={{
-          repeat: Infinity,
-          duration: 20,
-          ease: "linear",
+      <div
+        options={{
+          max: 45,
+          scale: 1,
+          speed: 450,
         }}
-        style={{ transformOrigin: "50% 50%" }}
-      />
-
-      <img
-        src={icon}
-        alt={title}
-        className="w-16 h-16 object-contain relative z-10"
-      />
-
-      <h3 className="text-white text-[20px] font-bold text-center relative z-10">
-        {title}
-      </h3>
-
-      {/* Hover text */}
-      <span
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-300 opacity-0 group-hover:opacity-60 transition-opacity duration-300 select-none pointer-events-none"
+        className="glass-card rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col overflow-hidden border border-white/10"
       >
-        Click to learn more →
-      </span>
-    </div>
-  </motion.div>
-</Tilt>
+        <img
+          src={icon}
+          alt={title}
+          className="w-16 h-16 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+        />
 
+        <h3 className="text-white text-[20px] font-bold text-center relative z-10 group-hover:text-neon-blue transition-colors">
+          {title}
+        </h3>
+
+        {/* Hover text */}
+        <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 select-none pointer-events-none tracking-wider">
+          Click to learn more →
+        </span>
+      </div>
+    </motion.div>
+  </Tilt>
 );
 
 const About = () => {
