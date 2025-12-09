@@ -11,40 +11,72 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
   const [isGameActive, setIsGameActive] = useState(false);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [textColor, setTextColor] = useState("#00ff88"); // Default green
 
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
 
-  // Cleaner "GAURAV" ASCII Art
-  const ASCII_ART = `
-   ________  ________  ___  ___  ________  ________  ___      ___ 
-  |\\   ____\\|\\   __  \\|\\  \\|\\  \\|\\   __  \\|\\   __  \\|\\  \\    /  /|
-  \\ \\  \\___|\\ \\  \\|\\  \\ \\  \\\\\\  \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\  /  / |
-   \\ \\  \\  __\\ \\   __  \\ \\  \\\\\\  \\ \\   _  _\\ \\   __  \\ \\  \\/  / / 
-    \\ \\  \\|\\  \\ \\  \\ \\  \\ \\  \\\\\\  \\ \\  \\\\  \\\\ \\  \\ \\  \\ \\    / /  
-     \\ \\_______\\ \\__\\ \\__\\ \\_______\\ \\__\\\\ _\\\\ \\__\\ \\__\\ \\__/ /   
-      \\|_______|\\|__|\\|__|\\|_______|\\|__|\\|__|\\|__|\\|__|\\|__|/    
-`;
+  const TANJIRO_ASCII = `-=:.-=-::--:::--+###**#%#**#%%%##********=-:==:::-:.:--..--:
+-=:.-=--:--..-**#%#*%%%##%%%##%##*********--==::-=:.:-:..:-:
+-=:.-=-::===**#%%##%%%#%%%%%%**##%%%%%%%##*+++=++=:.:------:
+-=::-=-::=+*#%%%##%%%#%%%%%##%%%%%%%%%%##*******-=:.:-----=:
+-=---=-:-+#*#%%%##%%%%%%%%#%%%%%%%%%%%%%%%%##**.:-:.:--:--=:
+=+--==-:-=*#%%%%%#%%%%%#+=-:..####*==#%%%%%%%#*+-=:::=-:--=:
+=+--=+=--==*#%@@@%%**=-::....:-+###+:-*%%%%#%#**+=-::=-:-==-
+.::::==:=-*%@%%%@#---::::::::=+#########%%%##%#=-.::::......
+=====+**==*##%@@*--::::::::::-#*#:-=++*#=*%##%@%*+===+------
+############%@@%=-::::::::::::::::::::::+%%##%@@@@%%########
+*#*+*##**###%%%+-::::::::::::::=****=--::=%#%#%@%%%++**++**+
+=+=-=*+=-+++%#%+::::-+=:::::::::---::::-::*#%%%@%#=--+=:-++-
+=+=-=+=--=+*###=::==:-==-:::::::-:::::::::*%@%==@#+--+=:-++-
+=+=-=+==+*#%%#%=:-:::::--=-::::::-:---:::-#@%#--%%#+=+=:-=+-
+=+=-=+=--+*+*%%#::::::-::::-:::::=+---=*-+%@#=:-#+=--+=::=+-
+++=-=+=--=+-*%#%=::::*%%#+::::::::::::::-#+%--:=+*=--+=--++=
+++--=+=--=+=*+*%%-:==:::::::-::::::::::::-=-::=-=*=--++==++=
+++===+=--++==+*%@%-:::::::::::::::::::::::::=+=-=*=--++==++=
+=+==++=--++==+#*=*+::::::::::::::::::::::-+=++=-=+=-=++-=+*=
+=+===+=--++===+--+++::::::-:.......::::::#%=+===+*=-=++-=++=
+=+==+*+--+*===++=+*++=::::::....:::::::==%#--===+*===++=-=+=
++*==+*+--+*==+*+++*===*=::::::--:::::-==:---:+==+*+==++=-++-
++*==++=--+*+=+*+++--++#%*++::::::::++==---:=:+==++=-=++==+*=
++*===*=-=+*+=+*+==::++::----=+*++=--::::::.--+===+=-=++==+*+
++*==+*++=**+++*+=+=:+=:::::::::::-::::::.....::=+*=-=++==+*+
++*==+*+=+**+++*+=+***+-..::::-+*+:-:::...........:-=+**==+*=
++*+=+*+==+*+=+*+=+*-.......::=+#*::.......::...:.........:-+
++*+=+*+==+*++===::.:...:::...:.:..:...:::....::.............
++*+==*+**-:........::.....:::--:::-:::......::..............
+=++++#-.............::.......::::-........:-................
++++*-......:.........::......:..........:::.............:...
+###.......::..........:::............:::-..............:::..
+%#-.......:-:..........:-::..:....::::::...............--:..`;
+
+  const NAME_ASCII = `  ________    _____   ____ _____________    _________   ____
+ /  _____/   /  _  \\ |    |   \\______   \\  /  _  \\   \\ /   /
+/   \\  ___  /  /_\\  \\|    |   /|       _/ /  /_\\  \\   Y   / 
+\\    \\_\\  \\/    |    \\    |  / |    |   \\/    |    \\     /  
+ \\______  /\\____|__  /______/  |____|_  /\\____|__  /\\___/   
+        \\/         \\/                 \\/         \\/         `;
 
   const COMMANDS = {
     help: "List all available commands",
-    cd: "Change directory, not really, lol!",
-    ls: "List files in the current directory",
-    mkdir: "Make a directory",
-    clear: "Clears the terminal",
-    cat: "Get a cute cat image.",
-    echo: "Prints the given text to the console",
-    about: "About Me.",
-    twitter: "Opens my Twitter Handle.",
-    github: "Opens my GitHub Profile.",
-    discord: "Opens my Discord Account.",
-    languages: "Languages I know.",
-    skills: "Skills I have.",
-    projects: "Projects I have worked on.",
-    editor: "Details about my current editor",
-    repo: "Opens this website's github repository.",
-    spotify: "Get info about my recently played song.",
-    sudo: "???",
+    about: "Everything about me",
+    projects: "View my 3D/Web projects",
+    skills: "My technical arsenal",
+    contact: "Get in touch",
+    resume: "View/Download my Resume",
+    linkedin: "Let's connect on LinkedIn",
+    github: "Check my code",
+    twitter: "Follow my thoughts",
+    email: "Send me an email",
+    pitch: "My elevator pitch for you",
+    color: "Change terminal color (e.g. color red, #fff)",
+    clear: "Clear the terminal",
+    ls: "List virtual directory",
+    cd: "Change directory",
+    mkdir: "Create directory",
+    cat: "Spawn a cute cat",
+    spotify: "Current jam",
+    sudo: "Admin privileges?",
     exit: "Exit fullscreen",
     snake: "Play Snake Game",
   };
@@ -87,18 +119,54 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
             isHelp: true,
           });
           break;
+        case "color":
+          if (args[1]) {
+            setTextColor(args[1]);
+            newOutput.push({
+              type: "response",
+              content: `Text color changed to ${args[1]}`,
+            });
+          } else {
+            newOutput.push({
+              type: "error",
+              content: "Usage: color <name|hex>",
+            });
+          }
+          break;
+        case "pitch":
+          newOutput.push({
+            type: "response",
+            content:
+              "I build scalable, AI-driven solutions that solve real problems. 3D web enthusiast with a knack for stunning UIs and robust backends. Ready to build the future? Let's talk.",
+          });
+          break;
+        case "resume":
+          window.open("/resume.pdf", "_blank"); // Placeholder
+          newOutput.push({ type: "response", content: "Opening Resume..." });
+          break;
+        case "email":
+          window.location.href = "mailto:gaurav@example.com";
+          newOutput.push({
+            type: "response",
+            content: "Opening mail client...",
+          });
+          break;
+        case "linkedin":
+          window.open("https://linkedin.com/in/gaurav", "_blank");
+          newOutput.push({ type: "response", content: "Opening LinkedIn..." });
+          break;
         case "ls":
           newOutput.push({
             type: "response",
             content:
-              "projects/  skills/  about.txt  contact.md  secret_plans.pdf",
+              "projects/  skills/  resume.pdf  contact.md  secret_plans.txt",
           });
           break;
         case "cd":
           newOutput.push({
             type: "response",
             content: args[1]
-              ? `Changed directory to ${args[1]} (just kidding)`
+              ? `Changed directory to ${args[1]} (virtual)`
               : "Please specify a directory.",
           });
           break;
@@ -114,12 +182,6 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           newOutput.push({
             type: "image",
             content: "https://cataas.com/cat/cute?width=300",
-          }); // Random cute cat
-          break;
-        case "echo":
-          newOutput.push({
-            type: "response",
-            content: args.slice(1).join(" "),
           });
           break;
         case "about":
@@ -133,22 +195,16 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
         case "github":
         case "discord":
         case "repo":
-          window.open("https://github.com/Poi5eN", "_blank"); // Placeholder for all links for now
+          window.open("https://github.com/Poi5eN", "_blank");
           newOutput.push({
             type: "response",
             content: `Opening ${command}...`,
           });
           break;
-        case "languages":
-          newOutput.push({
-            type: "response",
-            content: "JavaScript, Python, C++, Java, Rust, Go",
-          });
-          break;
         case "skills":
           newOutput.push({
             type: "response",
-            content: "React, Node.js, Three.js, Next.js, AI/ML",
+            content: "React, Node.js, Three.js, Next.js, AI/ML, Python, Rust",
           });
           break;
         case "projects":
@@ -156,12 +212,6 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
             type: "response",
             content:
               "Check out the Works section for my 3D portfolio projects!",
-          });
-          break;
-        case "editor":
-          newOutput.push({
-            type: "response",
-            content: "Visual Studio Code (Dark Mode, always)",
           });
           break;
         case "spotify":
@@ -174,7 +224,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           newOutput.push({
             type: "error",
             content:
-              "Permission denied: user is not in the sudoers file. This incident will be reported.",
+              "Permission denied: user is not in the sudoers file. Are you a root user?",
           });
           break;
         case "clear":
@@ -269,15 +319,16 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
               title="Maximize"
             />
           </div>
-          <div className="text-gray-500 text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
-            gaurav@portfolio — -zsh
+          <div className="text-[#00ff88] text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
+            gaurav@poi5en — -zsh
           </div>
         </div>
 
         {/* Terminal Body */}
         <div
-          className="flex-1 p-6 overflow-y-auto overflow-x-hidden text-[#e5e5e5] font-mono custom-scrollbar selection:bg-[#333] selection:text-white"
+          className="flex-1 p-6 overflow-y-auto overflow-x-hidden font-mono custom-scrollbar selection:bg-[#333] selection:text-white"
           onClick={() => inputRef.current?.focus()}
+          style={{ color: textColor }}
         >
           {/* Custom Scrollbar Styles embedded for this component */}
           <style>{`
@@ -288,9 +339,21 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           `}</style>
 
           {!isGameActive && (
-            <pre className="text-[6px] xs:text-[8px] sm:text-[10px] md:text-sm leading-[1.1] text-[#915EFF] font-bold mb-8 select-none opacity-90 whitespace-pre-wrap">
-              {ASCII_ART}
-            </pre>
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-8 items-center justify-center">
+              {/* Tanjiro ASCII - Left */}
+              <pre className="text-[4px] xs:text-[5px] sm:text-[6px] leading-[0.8] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
+                {TANJIRO_ASCII}
+              </pre>
+
+              {/* Name ASCII - Right (Vertically Centered with decorative lines) */}
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="w-full h-px bg-[#00ff88]/50" />
+                <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm leading-[1.1] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
+                  {NAME_ASCII}
+                </pre>
+                <div className="w-full h-px bg-[#00ff88]/50" />
+              </div>
+            </div>
           )}
 
           {isGameActive ? (
@@ -300,8 +363,8 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
               {output.map((line, i) => (
                 <div key={i} className="mb-1 leading-relaxed break-words">
                   {line.type === "command" ? (
-                    <div className="text-white mt-4 font-bold flex flex-row items-center">
-                      <span className="text-[#915EFF] mr-2">
+                    <div className="mt-4 font-bold flex flex-row items-center text-white">
+                      <span className="mr-2" style={{ color: textColor }}>
                         gaurav@/poi5en:~$
                       </span>
                       <span>{line.content}</span>
@@ -313,14 +376,14 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                   ) : line.type === "image" ? (
                     <img
                       src={line.content}
-                      alt="cat"
+                      alt="content"
                       className="w-64 h-auto rounded-md my-2"
                     />
                   ) : line.isHelp ? (
                     <div className="grid grid-cols-[100px_1fr] md:grid-cols-[150px_1fr] gap-x-4 gap-y-1 mt-2 text-sm text-gray-300">
                       {line.content.map(({ cmd, desc }, idx) => (
                         <React.Fragment key={idx}>
-                          <div className="text-[#27c93f]">{cmd}</div>
+                          <div style={{ color: textColor }}>{cmd}</div>
                           <div className="opacity-80">{desc}</div>
                         </React.Fragment>
                       ))}
@@ -334,7 +397,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
               ))}
 
               <div className="flex items-center gap-2 mt-4">
-                <span className="text-[#915EFF] font-bold">
+                <span className="font-bold" style={{ color: textColor }}>
                   gaurav@/poi5en:~$
                 </span>
                 <input
@@ -348,17 +411,15 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                   spellCheck="false"
                 />
               </div>
-
-              {/* Hints */}
-              <div className="mt-8 pt-4 border-t border-gray-800 text-gray-600 text-xs flex gap-4 select-none">
-                <span>[Tab] Auto-complete</span>
-                <span>[Esc] Clear</span>
-                <span>[↑][↓] History</span>
-              </div>
-
-              <div ref={bottomRef} className="pb-4" />
             </>
           )}
+        </div>
+
+        {/* Fixed Bottom Hints */}
+        <div className="bg-[#1a1a1a] px-4 py-1 flex items-center gap-4 text-[10px] text-gray-500 font-mono border-t border-[#333] select-none">
+          <span>[Tab] Auto-complete</span>
+          <span>[Esc] Clear</span>
+          <span>[↑][↓] History</span>
         </div>
       </div>
     </motion.div>

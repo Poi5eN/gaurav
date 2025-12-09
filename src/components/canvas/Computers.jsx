@@ -6,7 +6,7 @@ import CanvasLoader from "../Loader";
 
 import { Html } from "@react-three/drei";
 
-const Computers = ({ isMobile, onOpenTerminal }) => {
+const Computers = ({ isMobile, onOpenTerminal, isTerminalOpen }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
   return (
@@ -27,32 +27,36 @@ const Computers = ({ isMobile, onOpenTerminal }) => {
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
-      <Html
-        position={isMobile ? [0, 0, -1] : [0, 0, -1]}
-        transform
-        occlude
-        distanceFactor={6}
-      >
-        <div
-          onClick={onOpenTerminal}
-          className="group cursor-pointer flex items-center justify-center transition-transform active:scale-95"
+      {!isTerminalOpen && (
+        <Html
+          position={isMobile ? [0, -0.5, -1] : [0, -0.5, -1]}
+          center
+          distanceFactor={6}
+          style={{ pointerEvents: "auto" }}
         >
-          {/* Minimalist Glowing Dot / Icon */}
-          <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-[#00ff88]/30 flex items-center justify-center group-hover:w-36 group-hover:bg-black/80 transition-all duration-500 overflow-hidden shadow-[0_0_10px_rgba(0,255,136,0.2)] hover:shadow-[0_0_20px_rgba(0,255,136,0.4)]">
-            <span className="text-[#00ff88] font-bold font-mono text-lg group-hover:hidden animate-pulse">
-              &gt;
-            </span>
-            <span className="hidden group-hover:block text-[#00ff88] text-xs font-mono tracking-widest whitespace-nowrap px-2">
-              OPEN TERMINAL
-            </span>
+          <div
+            onClick={onOpenTerminal}
+            className="group cursor-pointer flex items-center justify-center transition-all duration-300 transform hover:scale-105"
+          >
+            {/* Enhanced Wide Button */}
+            <div className="relative w-48 h-12 rounded-full border border-[#00ff88]/20 bg-black/20 backdrop-blur-[2px] flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(0,255,136,0.1)] group-hover:bg-black/80 group-hover:border-[#00ff88] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] transition-all">
+              <span className="text-[#00ff88] text-xl font-mono font-bold animate-pulse">
+                &gt;_
+              </span>
+              <span className="text-[#00ff88] text-xs font-mono tracking-[0.2em] font-bold opacity-70 group-hover:opacity-100 transition-opacity">
+                TERMINAL
+              </span>
+              {/* Glow Effect */}
+              <div className="absolute inset-0 rounded-full bg-[#00ff88]/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
           </div>
-        </div>
-      </Html>
+        </Html>
+      )}
     </mesh>
   );
 };
 
-const ComputersCanvas = ({ onOpenTerminal }) => {
+const ComputersCanvas = ({ onOpenTerminal, isTerminalOpen }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -90,7 +94,11 @@ const ComputersCanvas = ({ onOpenTerminal }) => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Computers isMobile={isMobile} onOpenTerminal={onOpenTerminal} />
+        <Computers
+          isMobile={isMobile}
+          onOpenTerminal={onOpenTerminal}
+          isTerminalOpen={isTerminalOpen}
+        />
       </Suspense>
 
       <Preload all />

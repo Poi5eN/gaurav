@@ -5,7 +5,7 @@ import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
-const Navbar = () => {
+const Navbar = ({ onOpenTerminal }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -49,7 +49,21 @@ const Navbar = () => {
           </p>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Terminal Toggle Button - moved before nav links */}
+          <button
+            onClick={onOpenTerminal}
+            className="hidden sm:flex group relative w-10 h-10 items-center justify-center focus:outline-none"
+            title="Open Terminal"
+          >
+            <span className="text-[#00ff88] font-mono text-xl font-bold group-hover:scale-110 transition-transform">
+              &gt;_
+            </span>
+            <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-[#00ff88] text-[10px] px-2 py-1 rounded border border-[#00ff88]/30 whitespace-nowrap z-50">
+              TERMINAL
+            </div>
+          </button>
+
           <ul className="list-none hidden sm:flex flex-row gap-10">
             {navLinks.map((nav) => (
               <li

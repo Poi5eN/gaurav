@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./ThemeContext";
 import {
@@ -19,13 +19,30 @@ import Footer from "./components/Footer";
 const App = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+  useEffect(() => {
+    // Force scroll to top on reload, clearing hash if needed
+    if (window.history.scrollRestoration) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    // Clear any hash from URL
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <ThemeProvider>
       <BrowserRouter>
         <div className="relative z-0 bg-primary dark:bg-dark-primary transition-colors duration-300">
           <div className="bg-hero-pattern dark:bg-hero-pattern-dark bg-cover bg-no-repeat bg-center">
-            <Navbar />
-            <Hero onOpenTerminal={() => setIsFullScreen(true)} />
+            <Navbar onOpenTerminal={() => setIsFullScreen(true)} />
+            <Hero
+              onOpenTerminal={() => setIsFullScreen(true)}
+              isTerminalOpen={isFullScreen}
+            />
           </div>
 
           <Terminal

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
 
-const Hero = ({ onOpenTerminal }) => {
+const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
   const [index, setIndex] = useState(0);
 
   const colors = [
@@ -90,7 +90,10 @@ const Hero = ({ onOpenTerminal }) => {
         </div>
       </div>
 
-      <ComputersCanvas onOpenTerminal={onOpenTerminal} />
+      <ComputersCanvas
+        onOpenTerminal={onOpenTerminal}
+        isTerminalOpen={isTerminalOpen}
+      />
 
       <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
         <a href="#about">
