@@ -16,21 +16,12 @@ const ExperienceCard = ({ experience }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
-        background: "rgba(255, 255, 255, 0.05)",
-        backdropFilter: "blur(10px)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        color: "#fff",
-        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+        background: "#1d1836",
       }}
-      contentArrowStyle={{
-        borderRight: "7px solid  rgba(255, 255, 255, 0.05)",
-      }}
+      contentArrowStyle={{ borderRight: "7px solid #232631" }}
       date={experience.date}
-      dateClassName="text-white font-bold"
-      iconStyle={{
-        background: experience.iconBg,
-        boxShadow: "0 0 10px rgba(255,255,255,0.5)",
-      }}
+      dateClassName="text-secondary"
+      iconStyle={{ background: experience.iconBg }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
           <img
@@ -42,9 +33,7 @@ const ExperienceCard = ({ experience }) => {
       }
     >
       <div>
-        <h3 className="text-white text-[24px] font-bold drop-shadow-md">
-          {experience.title}
-        </h3>
+        <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
         <p
           className="text-secondary text-[16px] font-semibold"
           style={{ margin: 0 }}
@@ -74,7 +63,7 @@ const Experience = () => {
         <p className={`${styles.sectionSubText} text-center`}>
           What I have done so far
         </p>
-        <h2 className={`${styles.sectionHeadText} text-center text-liquid`}>
+        <h2 className={`${styles.sectionHeadText} text-center`}>
           Work Experience.
         </h2>
       </motion.div>

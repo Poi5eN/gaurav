@@ -70,12 +70,10 @@ const Contact = () => {
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-[0.75] glass-panel p-8 rounded-2xl border border-white/10"
+        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
       >
         <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={`${styles.sectionHeadTextFixed} text-liquid`}>
-          Contact.
-        </h3>
+        <h3 className={styles.sectionHeadTextFixed}>Contact.</h3>
 
         <form
           ref={formRef}
@@ -90,7 +88,7 @@ const Contact = () => {
               value={form.name}
               onChange={handleChange}
               placeholder="What's your good name?"
-              className="bg-white/5 border border-white/20 py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none font-medium focus:border-neon-blue focus:shadow-neon transition-all backdrop-blur-sm"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
           <label className="flex flex-col">
@@ -101,7 +99,7 @@ const Contact = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="What's your web address?"
-              className="bg-white/5 border border-white/20 py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none font-medium focus:border-neon-blue focus:shadow-neon transition-all backdrop-blur-sm"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
           <label className="flex flex-col">
@@ -112,13 +110,13 @@ const Contact = () => {
               value={form.message}
               onChange={handleChange}
               placeholder="What you want to say?"
-              className="bg-white/5 border border-white/20 py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none font-medium focus:border-neon-blue focus:shadow-neon transition-all backdrop-blur-sm"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
 
           <button
             type="submit"
-            className="bg-white/10 hover:bg-white/20 border border-white/10 py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary transition-all hover:shadow-neon duration-300"
+            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
           >
             {loading ? "Sending..." : "Send"}
           </button>

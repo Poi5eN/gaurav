@@ -19,18 +19,6 @@ const Computers = ({ isMobile }) => {
         shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
-      <pointLight
-        position={[-1, 0, 0]}
-        intensity={2}
-        color="#bc13fe"
-        distance={5}
-      />
-      <pointLight
-        position={[1, 0, 0]}
-        intensity={2}
-        color="#00f0ff"
-        distance={5}
-      />
       <primitive
         object={computer.scene}
         scale={isMobile ? 0.7 : 0.75}

@@ -12,10 +12,6 @@ module.exports = {
         "black-100": "#100d25",
         "black-200": "#090325",
         "white-100": "#f3f3f3",
-        "neon-blue": "#00f0ff",
-        "neon-purple": "#bc13fe",
-        "glass-white": "rgba(255, 255, 255, 0.05)",
-        // Dark mode specific (keeping existing for compatibility, but recommend consolidating)
         "dark-primary": "#f5f5f5",
         "dark-text": "#333333",
         "dark-secondary": "#666666",
@@ -26,8 +22,6 @@ module.exports = {
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",
-        glass: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-        neon: "0 0 10px #00f0ff, 0 0 20px #00f0ff",
       },
       screens: {
         xs: "450px",
