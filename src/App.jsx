@@ -1,3 +1,5 @@
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./ThemeContext";
 import {
@@ -10,18 +12,27 @@ import {
   Tech,
   Works,
   StarsCanvas,
+  Terminal,
 } from "./components";
 import Footer from "./components/Footer";
 
 const App = () => {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
   return (
     <ThemeProvider>
       <BrowserRouter>
         <div className="relative z-0 bg-primary dark:bg-dark-primary transition-colors duration-300">
           <div className="bg-hero-pattern dark:bg-hero-pattern-dark bg-cover bg-no-repeat bg-center">
             <Navbar />
-            <Hero />
+            <Hero onOpenTerminal={() => setIsFullScreen(true)} />
           </div>
+
+          <Terminal
+            isFullScreen={isFullScreen}
+            toggleFullScreen={() => setIsFullScreen(!isFullScreen)}
+          />
+
           <About />
           <Experience />
           <Tech />

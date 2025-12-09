@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
 
-const Hero = () => {
+const Hero = ({ onOpenTerminal }) => {
   const [index, setIndex] = useState(0);
 
   const colors = [
@@ -25,14 +25,14 @@ const Hero = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => prevIndex + 1);
-    }, 4000); // 4 seconds for reading time
+      setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 5000); // Increased time to ensure reading and animation completion
 
     return () => clearInterval(interval);
   }, []);
 
   const currentColor = colors[index % colors.length];
-  const currentText = texts[index % texts.length];
+  const currentText = texts[index];
 
   return (
     <section className={`relative w-full h-screen mx-auto`}>
@@ -90,7 +90,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <ComputersCanvas />
+      <ComputersCanvas onOpenTerminal={onOpenTerminal} />
 
       <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
         <a href="#about">

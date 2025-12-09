@@ -4,7 +4,9 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
-const Computers = ({ isMobile }) => {
+import { Html } from "@react-three/drei";
+
+const Computers = ({ isMobile, onOpenTerminal }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
   return (
@@ -25,11 +27,32 @@ const Computers = ({ isMobile }) => {
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
+      <Html
+        position={isMobile ? [0, 0, -1] : [0, 0, -1]}
+        transform
+        occlude
+        distanceFactor={6}
+      >
+        <div
+          onClick={onOpenTerminal}
+          className="group cursor-pointer flex items-center justify-center transition-transform active:scale-95"
+        >
+          {/* Minimalist Glowing Dot / Icon */}
+          <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-[#00ff88]/30 flex items-center justify-center group-hover:w-36 group-hover:bg-black/80 transition-all duration-500 overflow-hidden shadow-[0_0_10px_rgba(0,255,136,0.2)] hover:shadow-[0_0_20px_rgba(0,255,136,0.4)]">
+            <span className="text-[#00ff88] font-bold font-mono text-lg group-hover:hidden animate-pulse">
+              &gt;
+            </span>
+            <span className="hidden group-hover:block text-[#00ff88] text-xs font-mono tracking-widest whitespace-nowrap px-2">
+              OPEN TERMINAL
+            </span>
+          </div>
+        </div>
+      </Html>
     </mesh>
   );
 };
 
-const ComputersCanvas = () => {
+const ComputersCanvas = ({ onOpenTerminal }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -67,7 +90,7 @@ const ComputersCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Computers isMobile={isMobile} />
+        <Computers isMobile={isMobile} onOpenTerminal={onOpenTerminal} />
       </Suspense>
 
       <Preload all />
