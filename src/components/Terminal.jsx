@@ -5,13 +5,13 @@ import SnakeGame from "./SnakeGame";
 const Terminal = ({ isFullScreen, toggleFullScreen }) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState([
-    { type: "info", content: "Welcome to Gaurav's Portfolio Terminal v1.0.0" },
+    { type: "info", content: "Welcome to Neural Core v2.0.0 [System Active]" },
     { type: "info", content: "Type 'help' to see available commands." },
   ]);
   const [isGameActive, setIsGameActive] = useState(false);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [textColor, setTextColor] = useState("#00ff88"); // Default green
+  const [textColor, setTextColor] = useState("#915eff"); // Indigo Accent
 
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
@@ -66,19 +66,18 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
     resume: "View/Download my Resume",
     linkedin: "Let's connect on LinkedIn",
     github: "Check my code",
-    twitter: "Follow my thoughts",
     email: "Send me an email",
-    pitch: "My elevator pitch for you",
-    color: "Change terminal color (e.g. color red, #fff)",
     clear: "Clear the terminal",
     ls: "List virtual directory",
     cd: "Change directory",
     mkdir: "Create directory",
     cat: "Spawn a cute cat",
-    spotify: "Current jam",
-    sudo: "Admin privileges?",
-    exit: "Exit fullscreen",
     snake: "Play Snake Game",
+    exit: "Exit fullscreen",
+    // AI Specific
+    neural: "Visualize Neural Network Status",
+    predict: "Run AI Prediction Model",
+    model: "View Current Architecture",
   };
 
   useEffect(() => {
@@ -188,7 +187,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           newOutput.push({
             type: "response",
             content:
-              "I am Gaurav, a Full Stack Developer. I build intelligent systems.",
+              "I am Gaurav, an AI/ML Architect & Full Stack Developer. I build intelligent systems.",
           });
           break;
         case "twitter":
@@ -204,7 +203,8 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
         case "skills":
           newOutput.push({
             type: "response",
-            content: "React, Node.js, Three.js, Next.js, AI/ML, Python, Rust",
+            content:
+              "React, Node.js, Three.js, Next.js, AI/ML, PyTorch, TensorFlow",
           });
           break;
         case "projects":
@@ -217,7 +217,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
         case "spotify":
           newOutput.push({
             type: "response",
-            content: "Now Playing: 'Never Gonna Give You Up' - Rick Astley 🎵",
+            content: "Now Playing: 'Technologic' - Daft Punk 🎵",
           });
           break;
         case "sudo":
@@ -297,15 +297,15 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
 
   const windowClasses = isFullScreen
     ? "w-full max-w-5xl h-[85vh]"
-    : "w-full h-[500px] shadow-[0_0_50px_rgba(0,0,0,0.5)]";
+    : "w-full h-[500px] shadow-[0_0_50px_rgba(145,94,255,0.1)]";
 
   return (
     <motion.div layout className={containerClasses}>
       <div
-        className={`${windowClasses} bg-[#0c0c0c] flex flex-col rounded-xl overflow-hidden border border-[#333] shadow-2xl font-mono text-sm sm:text-base transition-all duration-300 relative group`}
+        className={`${windowClasses} bg-[#050816] flex flex-col rounded-xl overflow-hidden border border-[#2d2d2d] shadow-2xl font-mono text-sm sm:text-base transition-all duration-300 relative group`}
       >
         {/* Terminal Header */}
-        <div className="bg-[#1a1a1a] px-4 py-3 flex items-center justify-between border-b border-[#333]">
+        <div className="bg-[#100d25] px-4 py-3 flex items-center justify-between border-b border-[#232631]">
           <div className="flex gap-2 group-hover:opacity-100 opacity-50 transition-opacity duration-300">
             <div
               className="w-3 h-3 rounded-full bg-[#ff5f56]"
@@ -319,8 +319,8 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
               title="Maximize"
             />
           </div>
-          <div className="text-[#00ff88] text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
-            gaurav@poi5en — -zsh
+          <div className="text-[#915eff] text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
+            user@neural-core — -zsh
           </div>
         </div>
 
@@ -333,25 +333,25 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           {/* Custom Scrollbar Styles embedded for this component */}
           <style>{`
             .custom-scrollbar::-webkit-scrollbar { width: 10px; }
-            .custom-scrollbar::-webkit-scrollbar-track { bg: #0c0c0c; }
-            .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #333; border: 2px solid #0c0c0c; }
+            .custom-scrollbar::-webkit-scrollbar-track { bg: #050816; }
+            .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #333; border: 2px solid #050816; }
             .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #555; }
           `}</style>
 
           {!isGameActive && (
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-8 items-center justify-center">
               {/* Tanjiro ASCII - Left */}
-              <pre className="text-[4px] xs:text-[5px] sm:text-[6px] leading-[0.8] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
+              <pre className="text-[4px] xs:text-[5px] sm:text-[6px] leading-[0.8] text-[#915eff] font-bold select-none opacity-90 whitespace-pre">
                 {TANJIRO_ASCII}
               </pre>
 
               {/* Name ASCII - Right (Vertically Centered with decorative lines) */}
               <div className="flex flex-col items-center justify-center gap-2">
-                <div className="w-full h-px bg-[#00ff88]/50" />
-                <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm leading-[1.1] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
+                <div className="w-full h-px bg-[#915eff]/50" />
+                <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm leading-[1.1] text-[#915eff] font-bold select-none opacity-90 whitespace-pre">
                   {NAME_ASCII}
                 </pre>
-                <div className="w-full h-px bg-[#00ff88]/50" />
+                <div className="w-full h-px bg-[#915eff]/50" />
               </div>
             </div>
           )}
@@ -365,7 +365,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                   {line.type === "command" ? (
                     <div className="mt-4 font-bold flex flex-row items-center text-white">
                       <span className="mr-2" style={{ color: textColor }}>
-                        gaurav@/poi5en:~$
+                        user@neural-core:~$
                       </span>
                       <span>{line.content}</span>
                     </div>
@@ -398,7 +398,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
 
               <div className="flex items-center gap-2 mt-4">
                 <span className="font-bold" style={{ color: textColor }}>
-                  gaurav@/poi5en:~$
+                  user@neural-core:~$
                 </span>
                 <input
                   ref={inputRef}
@@ -416,7 +416,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
         </div>
 
         {/* Fixed Bottom Hints */}
-        <div className="bg-[#1a1a1a] px-4 py-1 flex items-center gap-4 text-[10px] text-gray-500 font-mono border-t border-[#333] select-none">
+        <div className="bg-[#100d25] px-4 py-1 flex items-center gap-4 text-[10px] text-gray-500 font-mono border-t border-[#232631] select-none">
           <span>[Tab] Auto-complete</span>
           <span>[Esc] Clear</span>
           <span>[↑][↓] History</span>

@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 
 import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
+import { ComputersCanvas, AbstractCanvas, NeuralSandbox } from "./canvas";
 import { ThemeContext } from "../ThemeContext";
 
 const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
@@ -42,69 +42,71 @@ const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
   const currentText = texts[index];
 
   return (
-    <section className={`relative w-full h-screen mx-auto`}>
-      <div
-        className={`absolute inset-0 top-[120px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
-      >
-        <div className="flex flex-col justify-center items-center mt-5">
-          <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-          <div className="w-1 sm:h-80 h-40 violet-gradient" />
-        </div>
+    <section className={`relative w-full h-screen mx-auto overflow-hidden`}>
+      <div className="absolute inset-0 z-0">
+        <AbstractCanvas />
+      </div>
 
-        <div>
-          <h1 className={`${styles.heroHeadText}`}>
-            Hi, I'm <span className="text-[#915EFF]">Gaurav</span>
-          </h1>
-          <div
-            className={`${styles.heroSubText} mt-2 h-[100px] overflow-hidden`}
+      <div
+        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} z-10 pointer-events-none`}
+      >
+        <div className="grid lg:grid-cols-2 gap-10 items-center h-full pointer-events-auto pb-40">
+          {/* Left Column: Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={index}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={{
-                  hidden: { opacity: 1 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      staggerChildren: 0.03, // Speed of typing
-                    },
-                  },
-                  exit: {
-                    opacity: 0,
-                    y: -10,
-                    transition: { duration: 0.3 },
-                  },
-                }}
-                style={{ color: currentColor }}
-              >
-                {currentText.split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    variants={{
-                      hidden: { opacity: 0, x: -5 },
-                      visible: { opacity: 1, x: 0 },
-                    }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </motion.p>
-            </AnimatePresence>
-          </div>
+            <h1
+              className={`${styles.heroHeadText} font-black text-white lg:text-[70px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[90px] mt-2`}
+            >
+              ARCHITECTING <br className="sm:block hidden" />
+              <span className="text-accent">INTELLIGENCE</span>
+            </h1>
+            <p className={`${styles.heroSubText} mt-4 text-white-100 max-w-lg`}>
+              Specialized in Neural Networks, Deep Learning,{" "}
+              <br className="sm:block hidden" />
+              and Full-Stack AI Solutions.
+            </p>
+
+            {/* CTA Button or Status */}
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="text-sm font-mono text-gray-300">
+                  SYSTEM ONLINE
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Interactive Sandbox */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="hidden lg:block w-full"
+          >
+            <div className="relative">
+              {/* Decorative Tech Lines */}
+              <div className="absolute -top-10 -right-10 w-20 h-20 border-t-2 border-r-2 border-accent/20 rounded-tr-3xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-20 h-20 border-b-2 border-l-2 border-accent/20 rounded-bl-3xl"></div>
+
+              {/* The Sandbox */}
+              <NeuralSandbox />
+
+              {/* Caption */}
+              <p className="text-right text-[10px] text-gray-500 font-mono mt-2">
+                INTERACTIVE_MODEL_V1 // TUNING_REQUIRED
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      <ComputersCanvas
-        onOpenTerminal={onOpenTerminal}
-        isTerminalOpen={isTerminalOpen}
-      />
-
-      <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
-        <a href="#about">
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+      <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center z-20 pointer-events-none">
+        <a href="#about" className="pointer-events-auto">
+          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-white/20 dark:border-black/10 flex justify-center items-start p-2 backdrop-blur-sm">
             <motion.div
               animate={{
                 y: [0, 24, 0],
@@ -114,7 +116,7 @@ const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
                 repeat: Infinity,
                 repeatType: "loop",
               }}
-              className="w-3 h-3 rounded-full bg-secondary mb-1"
+              className="w-3 h-3 rounded-full bg-accent mb-1 shadow-[0_0_10px_#00ff88]"
             />
           </div>
         </a>
