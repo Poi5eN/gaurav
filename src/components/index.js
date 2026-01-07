@@ -1,6 +1,7 @@
 import { EarthCanvas, BallCanvas, ComputersCanvas, StarsCanvas } from './canvas';
 import Hero from "./Hero";
 import Navbar from "./Navbar";
+import CanvasCursor from "./CanvasCursor";
 import About from "./About";
 import Tech from "./Tech";
 import Experience from "./Experience";
@@ -25,5 +26,6 @@ export {
   BallCanvas, 
   ComputersCanvas, 
   StarsCanvas,
-  Terminal
+  Terminal,
+  CanvasCursor
 };

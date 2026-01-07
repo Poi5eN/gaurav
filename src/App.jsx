@@ -13,6 +13,7 @@ import {
   Works,
   StarsCanvas,
   Terminal,
+  CanvasCursor,
 } from "./components";
 import Footer from "./components/Footer";
 
@@ -35,8 +36,11 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <div className="relative z-0 bg-primary dark:bg-dark-primary transition-colors duration-300">
+          <CanvasCursor />
           <div className="bg-hero-pattern dark:bg-hero-pattern-dark bg-cover bg-no-repeat bg-center">
             <Navbar onOpenTerminal={() => setIsFullScreen(true)} />
             <Hero

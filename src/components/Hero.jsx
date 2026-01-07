@@ -2,25 +2,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 
 import { styles } from "../styles";
-import { ComputersCanvas, AbstractCanvas, NeuralSandbox } from "./canvas";
+import { ArchitectCanvas, ArchitectUI } from "./canvas";
 import { ThemeContext } from "../ThemeContext";
 
 const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
   const { theme } = useContext(ThemeContext);
   const [index, setIndex] = useState(0);
+  const [mode, setMode] = useState("chaos"); // State for The Architect
 
   // Inverted Logic: theme='dark' => .dark class => Light UI Mode
-  // So for 'dark' theme (Light UI), we want darker text colors
   const colors =
     theme === "dark"
-      ? [
-          "#9d29b0", // Darker Pink
-          "#4a1a9e", // Darker Purple
-          "#265c9e", // Darker Blue
-          "#a83a42", // Darker Red
-          "#8a8435", // Darker Yellow
-          "#1f7a2b", // Darker Green
-        ]
+      ? ["#9d29b0", "#4a1a9e", "#265c9e", "#a83a42", "#8a8435", "#1f7a2b"]
       : ["#eb4cde", "#6826e5", "#a2cbff", "#d9757e", "#c6bf7e", "#54bf62"];
 
   const texts = [
@@ -33,18 +26,16 @@ const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 5000); // Increased time to ensure reading and animation completion
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const currentColor = colors[index % colors.length];
-  const currentText = texts[index];
-
   return (
     <section className={`relative w-full h-screen mx-auto overflow-hidden`}>
+      {/* Background: Unified Architect Canvas (Background + Right Model) */}
       <div className="absolute inset-0 z-0">
-        <AbstractCanvas />
+        <ArchitectCanvas mode={mode} />
       </div>
 
       <div
@@ -80,24 +71,19 @@ const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
             </div>
           </motion.div>
 
-          {/* Right Column: Interactive Sandbox */}
+          {/* Right Column: Interaction UI (Canvas content is handled by ArchitectCanvas) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="hidden lg:block w-full"
+            className="hidden lg:block w-full h-full max-h-[400px]"
           >
-            <div className="relative">
-              {/* Decorative Tech Lines */}
-              <div className="absolute -top-10 -right-10 w-20 h-20 border-t-2 border-r-2 border-accent/20 rounded-tr-3xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-20 h-20 border-b-2 border-l-2 border-accent/20 rounded-bl-3xl"></div>
-
-              {/* The Sandbox */}
-              <NeuralSandbox />
+            <div className="relative w-full h-full flex flex-col justify-end">
+              <ArchitectUI mode={mode} setMode={setMode} />
 
               {/* Caption */}
-              <p className="text-right text-[10px] text-gray-500 font-mono mt-2">
-                INTERACTIVE_MODEL_V1 // TUNING_REQUIRED
+              <p className="text-right text-[10px] text-gray-500 font-mono mt-2 uppercase tracking-widest">
+                Sentient_Core_v3 // AWAITING_DIRECTIVES
               </p>
             </div>
           </motion.div>

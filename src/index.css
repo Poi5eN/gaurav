@@ -55,7 +55,7 @@ body {
 
 /* Hero Pattern */
 .bg-hero-pattern {
-  background-image: url("../assets/herobg.png");
+  background-image: url("/herobg.png");
 }
 
 /* Canvas Loader */
