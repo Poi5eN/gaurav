@@ -1,20 +1,27 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
+import { ThemeContext } from "../ThemeContext";
 
 const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
+  const { theme } = useContext(ThemeContext);
   const [index, setIndex] = useState(0);
 
-  const colors = [
-    "#eb4cde",
-    "#6826e5",
-    "#a2cbff",
-    "#d9757e",
-    "#c6bf7e",
-    "#54bf62",
-  ];
+  // Inverted Logic: theme='dark' => .dark class => Light UI Mode
+  // So for 'dark' theme (Light UI), we want darker text colors
+  const colors =
+    theme === "dark"
+      ? [
+          "#9d29b0", // Darker Pink
+          "#4a1a9e", // Darker Purple
+          "#265c9e", // Darker Blue
+          "#a83a42", // Darker Red
+          "#8a8435", // Darker Yellow
+          "#1f7a2b", // Darker Green
+        ]
+      : ["#eb4cde", "#6826e5", "#a2cbff", "#d9757e", "#c6bf7e", "#54bf62"];
 
   const texts = [
     "Engineer. Founder. Polyglot. Always learning.",
@@ -45,11 +52,11 @@ const Hero = ({ onOpenTerminal, isTerminalOpen }) => {
         </div>
 
         <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
+          <h1 className={`${styles.heroHeadText}`}>
             Hi, I'm <span className="text-[#915EFF]">Gaurav</span>
           </h1>
           <div
-            className={`${styles.heroSubText} mt-2 text-white-100 h-[100px] overflow-hidden`}
+            className={`${styles.heroSubText} mt-2 h-[100px] overflow-hidden`}
           >
             <AnimatePresence mode="wait">
               <motion.p

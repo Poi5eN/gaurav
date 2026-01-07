@@ -28,7 +28,7 @@ module.exports = {
       },
       backgroundImage: {
         "hero-pattern": "url('/herobg.png')",
-        "hero-pattern-dark": "url('/herobg.png')", 
+        "hero-pattern-dark": "none", 
       },
     },
   },
