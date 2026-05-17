@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logo / Brand */}
         <div className="flex flex-col items-center md:items-start font-mono">
           <p className="text-[#F0F4F8] text-[16px] font-bold cursor-pointer">
-            Gaurav <span className="text-[#00D9FF]">| Poi5eN</span>
+            Gourav <span className="text-[#00D9FF]">| Poi5eN</span>
           </p>
           <p className="text-[#8BA3B8] text-[11px] mt-1">
             Taking AI ideas from model &rarr; product &rarr; production.
@@ -19,12 +19,12 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-[#8BA3B8] font-mono text-[11px] text-center">
-          &copy; {new Date().getFullYear()} Gaurav. All rights reserved.
+          &copy; {new Date().getFullYear()} Gourav. All rights reserved.
         </div>
 
         {/* Social Icons */}
         <div className="flex gap-4">
-          <SocialIcon href="https://linkedin.com" icon={<FaLinkedin />} />
+          <SocialIcon href="https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4" icon={<FaLinkedin />} />
           <SocialIcon href="https://github.com/Poi5eN" icon={<FaGithub />} />
         </div>
       </div>

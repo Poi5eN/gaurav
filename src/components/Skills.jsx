@@ -1,31 +1,41 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as dMotion } from "framer-motion";
 import { SectionWrapper } from "../hoc";
-import { Code2, Brain, Cpu, Database, Server, Terminal, Sparkles, Flame } from "lucide-react";
+import { Code2, Brain, Cpu, Database, Server, Terminal, Sparkles, Flame, Layers } from "lucide-react";
 
 const Skills = () => {
   const engineeringSkills = [
-    { name: "React / Next.js 14", level: 95, icon: <Code2 className="text-[#00D9FF] w-5 h-5" /> },
-    { name: "TypeScript / JavaScript", level: 95, icon: <Terminal className="text-[#00D9FF] w-5 h-5" /> },
-    { name: "Node.js / Express", level: 90, icon: <Server className="text-[#00D9FF] w-5 h-5" /> },
-    { name: "PostgreSQL / MongoDB", level: 85, icon: <Database className="text-[#00D9FF] w-5 h-5" /> },
-    { name: "Docker / Kubernetes", level: 80, icon: <Cpu className="text-[#00D9FF] w-5 h-5" /> },
-    { name: "AWS / Cloud Infrastructure", level: 80, icon: <Server className="text-[#00D9FF] w-5 h-5" /> },
+    { name: "Next.js / React.js", level: 92, icon: <Code2 className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "TypeScript / JS", level: 90, icon: <Terminal className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "NestJS / Node.js", level: 88, icon: <Server className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "PostgreSQL / Prisma", level: 82, icon: <Database className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "Redis / BullMQ", level: 78, icon: <Layers className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "Docker / Kubernetes", level: 72, icon: <Cpu className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "AWS (EC2/S3/Lambda)", level: 72, icon: <Server className="text-[#00D9FF] w-4 h-4" /> },
+    { name: "GraphQL / WebSockets", level: 68, icon: <Terminal className="text-[#00D9FF] w-4 h-4" /> },
   ];
 
   const aiSkills = [
-    { name: "Python / PyTorch / NumPy", level: 90, icon: <Brain className="text-[#7B2FFF] w-5 h-5" /> },
-    { name: "LangChain / LlamaIndex", level: 90, icon: <Sparkles className="text-[#7B2FFF] w-5 h-5" /> },
-    { name: "LLM APIs (OpenAI, Claude, etc.)", level: 95, icon: <Flame className="text-[#7B2FFF] w-5 h-5" /> },
-    { name: "RAG & Vector DBs (Pinecone, Qdrant)", level: 88, icon: <Database className="text-[#7B2FFF] w-5 h-5" /> },
-    { name: "Fine-Tuning & Model Eval", level: 80, icon: <Cpu className="text-[#7B2FFF] w-5 h-5" /> },
-    { name: "LLMOps & Prompt Engineering", level: 95, icon: <Terminal className="text-[#7B2FFF] w-5 h-5" /> },
+    { name: "OpenAI API / GPT-4", level: 88, icon: <Flame className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "LangChain", level: 85, icon: <Sparkles className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "RAG Pipelines", level: 82, icon: <Database className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "Vector DBs (Pinecone/Chroma)", level: 78, icon: <Database className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "Prompt Engineering", level: 80, icon: <Terminal className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "Hugging Face", level: 70, icon: <Cpu className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "Python (AI/ML)", level: 72, icon: <Brain className="text-[#7B2FFF] w-4 h-4" /> },
+    { name: "OpenAI Vision API", level: 75, icon: <Sparkles className="text-[#7B2FFF] w-4 h-4" /> },
+  ];
+
+  const badges = [
+    { category: "Languages", items: "JavaScript · TypeScript · Python · SQL · GraphQL · C++" },
+    { category: "Databases", items: "PostgreSQL · MongoDB · MySQL · Redis · Firebase · Supabase · Pinecone · ChromaDB" },
+    { category: "Cloud & Dev", items: "AWS · GCP · Docker · Kubernetes · CI/CD · Nginx · TurboRepo" }
   ];
 
   return (
     <div className="w-full">
       {/* Header */}
-      <motion.div
+      <dMotion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -39,13 +49,13 @@ const Skills = () => {
           Dual-Track Mastery
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-[#00D9FF] to-[#7B2FFF] mx-auto mt-4 rounded-full" />
-      </motion.div>
+      </dMotion.div>
 
       {/* Dual Tracks */}
-      <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch">
+      <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch px-4">
         
         {/* Track A: Engineering Foundation */}
-        <motion.div
+        <dMotion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -63,18 +73,18 @@ const Skills = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {engineeringSkills.map((skill, idx) => (
-                <div key={idx} className="space-y-2">
-                  <div className="flex justify-between items-center text-sm font-mono">
+                <div key={idx} className="space-y-1.5">
+                  <div className="flex justify-between items-center text-xs sm:text-sm font-mono">
                     <div className="flex items-center gap-2">
                       {skill.icon}
                       <span className="text-[#F0F4F8]">{skill.name}</span>
                     </div>
-                    <span className="text-[#00D9FF]">{skill.level}%</span>
+                    <span className="text-[#00D9FF] font-semibold">{skill.level}%</span>
                   </div>
                   <div className="w-full bg-[#020608] h-1.5 rounded-full overflow-hidden border border-[#1A2332]">
-                    <motion.div
+                    <dMotion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
@@ -86,10 +96,10 @@ const Skills = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </dMotion.div>
 
         {/* Track B: AI/ML Arsenal */}
-        <motion.div
+        <dMotion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -107,18 +117,18 @@ const Skills = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {aiSkills.map((skill, idx) => (
-                <div key={idx} className="space-y-2">
-                  <div className="flex justify-between items-center text-sm font-mono">
+                <div key={idx} className="space-y-1.5">
+                  <div className="flex justify-between items-center text-xs sm:text-sm font-mono">
                     <div className="flex items-center gap-2">
                       {skill.icon}
                       <span className="text-[#F0F4F8]">{skill.name}</span>
                     </div>
-                    <span className="text-[#7B2FFF]">{skill.level}%</span>
+                    <span className="text-[#7B2FFF] font-semibold">{skill.level}%</span>
                   </div>
                   <div className="w-full bg-[#020608] h-1.5 rounded-full overflow-hidden border border-[#1A2332]">
-                    <motion.div
+                    <dMotion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
@@ -130,16 +140,37 @@ const Skills = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </dMotion.div>
       </div>
 
+      {/* Additional Badges Row */}
+      <dMotion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-6xl mx-auto mt-12 px-4"
+      >
+        <div className="bg-[#0A0F14] border border-[#1A2332] p-6 sm:p-8 rounded-2xl space-y-4">
+          <div className="font-mono text-xs text-[#8BA3B8] uppercase tracking-wider mb-2 border-b border-[#1A2332] pb-2">
+            // Additional Technical Capability Index:
+          </div>
+          {badges.map((badge, idx) => (
+            <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 text-xs md:text-sm font-mono">
+              <span className="text-[#00D9FF] font-semibold min-w-[120px] uppercase tracking-wider">{badge.category}:</span>
+              <span className="text-[#8BA3B8] leading-relaxed">{badge.items}</span>
+            </div>
+          ))}
+        </div>
+      </dMotion.div>
+
       {/* Key Callout Banner */}
-      <motion.div
+      <dMotion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="max-w-4xl mx-auto mt-16 p-6 rounded-2xl border border-dashed border-[#1A2332] bg-surface text-center flex flex-col md:flex-row items-center justify-center gap-4 hover:border-[#00D9FF]/30 transition-all"
+        className="max-w-4xl mx-auto mt-16 p-6 rounded-2xl border border-dashed border-[#1A2332] bg-surface text-center flex flex-col md:flex-row items-center justify-center gap-4 hover:border-[#00D9FF]/30 transition-all px-4"
       >
         <div className="p-3 bg-[#00D9FF]/10 rounded-xl border border-[#00D9FF]/20 flex items-center justify-center">
           <Sparkles className="text-[#00D9FF] w-6 h-6 animate-pulse" />
@@ -147,9 +178,10 @@ const Skills = () => {
         <p className="text-[#8BA3B8] font-mono text-sm md:text-base">
           "I am one of the few engineers who can take an AI idea from <span className="text-[#00D9FF]">model</span> &rarr; <span className="text-[#7B2FFF]">product</span> &rarr; <span className="text-[#00FF9D]">production</span>."
         </p>
-      </motion.div>
+      </dMotion.div>
     </div>
   );
 };
 
-export default SectionWrapper(Skills, "skills");
+const SkillsSection = SectionWrapper(Skills, "skills");
+export default SkillsSection;

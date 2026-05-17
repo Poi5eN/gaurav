@@ -15,159 +15,109 @@ import {
   git,
   figma,
   docker,
-  meta,
-  starbucks,
   dkd,
   corplyx,
-  tesla,
-  shopify,
   carrent,
   jobit,
   tripguide,
   threejs,
-  info,
 } from "../assets";
 
 export const navLinks = [
-  {
-    id: "about",
-    title: "About",
-  },
-  {
-    id: "skills",
-    title: "Skills",
-  },
-  {
-    id: "ailab",
-    title: "AI Lab",
-  },
-  {
-    id: "work",
-    title: "Projects",
-  },
-  {
-    id: "experience",
-    title: "Experience",
-  },
-  {
-    id: "resume",
-    title: "Resume",
-  },
-  {
-    id: "blog",
-    title: "Thoughts",
-  },
-  {
-    id: "contact",
-    title: "Contact",
-  },
+  { id: "about", title: "About" },
+  { id: "skills", title: "Skills" },
+  { id: "ailab", title: "AI Lab" },
+  { id: "work", title: "Projects" },
+  { id: "experience", title: "Experience" },
+  { id: "resume", title: "Resume" },
+  { id: "blog", title: "Thoughts" },
+  { id: "contact", title: "Contact" },
 ];
 
 const services = [
-  {
-    title: "Full-Stack Systems",
-    icon: web,
-  },
-  {
-    title: "Cognitive Pipelines (AI)",
-    icon: mobile,
-  },
-  {
-    title: "Autonomous Agents",
-    icon: backend,
-  },
-  {
-    title: "LLMOps & Infra",
-    icon: creator,
-  },
+  { title: "Full Stack Systems", icon: web },
+  { title: "Cognitive Pipelines (AI)", icon: mobile },
+  { title: "Autonomous Agents", icon: backend },
+  { title: "LLMOps & Infra", icon: creator },
 ];
 
 const technologies = [
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
-  },
+  { name: "HTML 5", icon: html },
+  { name: "CSS 3", icon: css },
+  { name: "JavaScript", icon: javascript },
+  { name: "TypeScript", icon: typescript },
+  { name: "React JS", icon: reactjs },
+  { name: "Redux Toolkit", icon: redux },
+  { name: "Tailwind CSS", icon: tailwind },
+  { name: "Node JS", icon: nodejs },
+  { name: "MongoDB", icon: mongodb },
+  { name: "Three JS", icon: threejs },
+  { name: "git", icon: git },
+  { name: "figma", icon: figma },
+  { name: "docker", icon: docker },
 ];
 
 const experiences = [
   {
-    title: "AI & Full Stack Engineer",
-    company_name: "Poi5eN Labs / R&D",
+    title: "Full Stack Developer",
+    company_name: "India Accelerator",
     icon: dkd,
     iconBg: "#0A0F14",
-    date: "Dec 2024 - Present",
+    date: "Jul 2025 — Present",
+    location: "Sector 28, Gurugram",
     points: [
-      "Architected autonomous multi-agent planning frameworks inside React / Next.js that reduced execution failure loops by 40%.",
-      "Deployed custom RAG pipelines over vector database systems (Qdrant/Pinecone), handling semantic search queries with < 80ms latency.",
-      "Established LLMOps proxy layers and custom cost/token estimation metric frameworks, tracking model utilization parameters in real-time.",
+      "Architected enterprise platforms including vehicle claim management, legal-tech APIs, and coworking automation using NestJS, Next.js, PostgreSQL, Redis, GCP, TurboRepo monorepo, and AI integrations.",
+      "Integrated OpenAI Vision API into real-time image verification pipelines for AI-powered damage detection, reducing manual claim assessment time by ~40%.",
+      "Built and deployed approval engines, operational automations, and WiFi access provisioning systems, improving platform workflow efficiency across enterprise clients."
     ],
+    impact: "-40% claim time",
+    current: true
   },
   {
-    title: "Full Stack Software Developer",
+    title: "Full Stack Developer",
     company_name: "DoubleKlick Designs",
     icon: corplyx,
     iconBg: "#0A0F14",
-    date: "Jan 2023 - Nov 2024",
+    date: "Dec 2024 — Jul 2025",
+    location: "Okhla Phase-I, New Delhi",
     points: [
-      "Engineered robust web applications in NestJS, Next.js, and Docker, boosting server load speeds by 25%.",
-      "Collaborated with cross-functional product and design teams to build high-performance client applications with complex interactive layers.",
-      "Refactored relational and NoSQL database schemas to streamline transactional reads, cutting query latencies by 30%.",
+      "Developed scalable full-stack applications using Next.js, NestJS, Prisma ORM, MongoDB, and AWS, delivering production-grade REST APIs with authentication flows.",
+      "Unified 5+ challan provider APIs into a single optimized gateway using Redis caching, slashing response time from 10+ minutes to under 3 seconds serving 10K+ monthly requests.",
+      "Implemented CI/CD pipelines and AWS deployments (EC2, S3, Lambda), reducing production deployment errors by 25%."
     ],
+    impact: "10min → 3sec"
   },
+  {
+    title: "Software Engineer",
+    company_name: "Corplyx Technologies Pvt. Ltd.",
+    icon: dkd,
+    iconBg: "#0A0F14",
+    date: "Jun 2023 — Nov 2024",
+    location: "Sector-62, Noida",
+    points: [
+      "Led scalable web application development, streamlining backend query performance and frontend bundle sizes to achieve 30% reduction in page load times.",
+      "Built React.js interfaces with Redux state management and Node.js/Express.js backends with MongoDB for high-throughput data workflows."
+    ],
+    impact: "-30% load time"
+  },
+  {
+    title: "Software Developer",
+    company_name: "Infotech Software Solutions",
+    icon: corplyx,
+    iconBg: "#0A0F14",
+    date: "Sept 2022 — Jun 2023",
+    location: "Sector-10, Noida",
+    points: [
+      "Developed backend microservices, frontend components, and enhanced database workflows resulting in 15% improvement in system response times."
+    ],
+    impact: "+15% response"
+  }
 ];
 
 const testimonials = [
   {
     testimonial:
-      "Gaurav was one of the few engineers who easily bridged the gap between raw Python ML prototyping and building our entire Next.js product wrapper.",
+      "Gourav was one of the few engineers who easily bridged the gap between raw Python ML prototyping and building our entire Next.js product wrapper.",
     name: "Amit Sharma",
     designation: "Founder",
     company: "AlphaAI",
@@ -185,49 +135,115 @@ const testimonials = [
 
 const projects = [
   {
-    name: "FleetOptimizer AI",
+    name: "Paramount (AI Claim Platform)",
     description:
-      "A fleet coordination tool powered by autonomous pathfinding. Integrates localized traffic patterns to cut transport delays by 20% in real-world simulations.",
-    problem: "Inefficient fleet routes causing fuel waste and delayed shipments.",
-    approach: "Leveraged A* pathfinding and vector analysis to construct responsive, real-time optimal coordinate routes.",
-    impact: "Cut fuel consumption by 15% and delivered 20% faster dispatch routing.",
+      "Computer vision meets insurance workflows. Integrated OpenAI Vision API for real-time damage assessment and auto-classification.",
+    problem: "Manual vehicle damage assessment was slow, inconsistent, and costly.",
+    approach: "Integrated OpenAI Vision API into real-time image analysis pipeline with multi-role approval workflows and insurance integrations.",
+    impact: "↓40% claim assessment time · Enterprise client production deployment",
     tags: [
-      { name: "react", color: "blue-text-gradient" },
-      { name: "mongodb", color: "green-text-gradient" },
-      { name: "threejs", color: "pink-text-gradient" },
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "NestJS", color: "green-text-gradient" },
+      { name: "PostgreSQL", color: "pink-text-gradient" },
+      { name: "OpenAI Vision", color: "blue-text-gradient" },
     ],
     image: carrent,
-    source_code_link: "https://github.com/Poi5eN/fleet-optimizer-ai",
+    source_code_link: "https://sage.paramountservices.co.in/",
   },
   {
-    name: "JobMatch LLM",
+    name: "ChallanPay Gateway",
     description:
-      "An recruitment portal using vector embeddings and semantic similarity filters to rank candidate resumes directly against deep job descriptions.",
-    problem: "Recruiters manually screening thousands of resumes with poor keyword matches.",
-    approach: "Integrated LangChain semantic similarity indexing over candidates' parsed resume tokens.",
-    impact: "Reduced candidate filtering time by 60% with a 90% recruiter feedback satisfaction rate.",
+      "Unified 5+ challan provider APIs with Redis caching. Slashing response time from 10+ minutes to under 3 seconds.",
+    problem: "Users had to check 5+ challan portals manually, each taking 2+ minutes.",
+    approach: "Unified all providers into one Redis-cached gateway. Single API call returns unified result.",
+    impact: "10min → <3sec response · 10K+ monthly requests · 25% fewer deployment errors",
     tags: [
-      { name: "react", color: "blue-text-gradient" },
-      { name: "langchain", color: "green-text-gradient" },
-      { name: "fastapi", color: "pink-text-gradient" },
+      { name: "Node.js", color: "blue-text-gradient" },
+      { name: "Prisma", color: "green-text-gradient" },
+      { name: "Redis", color: "pink-text-gradient" },
+      { name: "AWS", color: "blue-text-gradient" },
     ],
     image: jobit,
-    source_code_link: "https://github.com/Poi5eN/job-match-llm",
+    source_code_link: "https://lawyered.in/",
   },
   {
-    name: "Agentic Travel Plan",
+    name: "Bhraman Together",
     description:
-      "An autonomous travel agent utilizing multi-agent consensus to research hotels, book flights, and compile personalized daily schedules.",
-    problem: "Fragmented travel planning websites that require manually aligning dozens of flight and hotel times.",
-    approach: "Deployed Autogen orchestrators executing sandboxed parallel search steps across external APIs.",
-    impact: "Reduced typical multi-destination itinerary creation time from 4 hours to under 2 minutes.",
+      "End-to-end travel platform with real-time geospatial intelligence, cab coordination, and automated itinerary generation.",
+    problem: "Travelers needed one platform for booking, routing, and cab coordination.",
+    approach: "Geospatial MongoDB queries + Google Maps route planning + real-time availability engine.",
+    impact: "Sub-2s search results · Live production with real bookings",
     tags: [
-      { name: "nextjs", color: "blue-text-gradient" },
-      { name: "supabase", color: "green-text-gradient" },
-      { name: "autogen", color: "pink-text-gradient" },
+      { name: "NestJS", color: "blue-text-gradient" },
+      { name: "Next.js", color: "green-text-gradient" },
+      { name: "MongoDB", color: "pink-text-gradient" },
+      { name: "Google Maps", color: "blue-text-gradient" },
     ],
     image: tripguide,
-    source_code_link: "https://github.com/Poi5eN/agentic-travel-planner",
+    source_code_link: "https://www.bhramantogether.com/",
+  },
+  {
+    name: "RAG Knowledge Base",
+    description:
+      "Advanced PDF ingestion and intelligent vector search. Powered by LangChain, ChromaDB, and OpenAI API.",
+    problem: "Long PDF documents are unsearchable and require full reads.",
+    approach: "LangChain pipeline: PDF → chunking → ChromaDB embeddings → semantic retrieval → OpenAI answer generation.",
+    impact: "Semantic search across 100-page docs in <2s · Live Streamlit demo",
+    tags: [
+      { name: "Python", color: "blue-text-gradient" },
+      { name: "LangChain", color: "green-text-gradient" },
+      { name: "ChromaDB", color: "pink-text-gradient" },
+      { name: "Streamlit", color: "blue-text-gradient" },
+    ],
+    image: carrent,
+    source_code_link: "https://rag-knowledge-basev2.streamlit.app/",
+  },
+  {
+    name: "IA Spaces Coworking",
+    description:
+      "Coworking seat booking, WiFi access provisioning, and automated approvals dashboard.",
+    problem: "Coworking seat booking, WiFi access, and approvals were all manual.",
+    approach: "Built automated WiFi provisioning, seat booking engine, and enterprise approval integrations.",
+    impact: "Live at iaspaces.co · Multiple enterprise clients",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "NestJS", color: "green-text-gradient" },
+      { name: "PostgreSQL", color: "pink-text-gradient" },
+      { name: "TurboRepo", color: "blue-text-gradient" },
+    ],
+    image: jobit,
+    source_code_link: "https://iaspaces.co/",
+  },
+  {
+    name: "RukiyeZara",
+    description:
+      "Full-featured property booking platform with optimized data fetching, Supabase backend, and geolocation search.",
+    problem: "Property booking platforms are notoriously slow.",
+    approach: "Next.js with optimized data fetching, Supabase backend, geolocation search.",
+    impact: "<2s page load · Live production",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "TypeScript", color: "green-text-gradient" },
+      { name: "Supabase", color: "pink-text-gradient" },
+    ],
+    image: tripguide,
+    source_code_link: "https://www.rukiyezara.com/",
+  },
+  {
+    name: "Digital Vidya Saarthi",
+    description:
+      "Full-stack school ops platform covering attendance, enrollment, and administrative dashboard workflows.",
+    problem: "Fragmented school management tools with high operational latency.",
+    approach: "React.js interfaces with Redux state management and Node.js/Express.js backends with MongoDB.",
+    impact: "Integrated admin, teacher, student dashboards with sub-second loads",
+    tags: [
+      { name: "React.js", color: "blue-text-gradient" },
+      { name: "Node.js", color: "green-text-gradient" },
+      { name: "MongoDB", color: "pink-text-gradient" },
+      { name: "Redux", color: "blue-text-gradient" },
+    ],
+    image: carrent,
+    source_code_link: "https://www.digitalvidyasaarthi.in/",
   },
 ];
 

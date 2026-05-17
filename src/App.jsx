@@ -17,7 +17,8 @@ import {
   Terminal,
   Preloader,
   Resume,
-  Blog
+  Blog,
+  StatsBar
 } from "./components";
 import Footer from "./components/Footer";
 
@@ -124,6 +125,8 @@ const App = () => {
               isFullScreen={isFullScreen}
               toggleFullScreen={() => setIsFullScreen(!isFullScreen)}
             />
+
+            <StatsBar />
 
             <About />
             <Skills />

@@ -1,4 +1,4 @@
-import { EarthCanvas, BallCanvas, ComputersCanvas, StarsCanvas } from './canvas';
+import { EarthCanvas, BallCanvas, ComputersCanvas, StarsCanvas, Hero3DScene } from './canvas';
 import Hero from "./Hero";
 import Navbar from "./Navbar";
 import About from "./About";
@@ -13,6 +13,7 @@ import Terminal from "./Terminal";
 import Preloader from "./Preloader";
 import Resume from "./Resume";
 import Blog from "./Blog";
+import StatsBar from "./StatsBar";
 
 export {
   Hero,
@@ -29,8 +30,10 @@ export {
   BallCanvas, 
   ComputersCanvas, 
   StarsCanvas,
+  Hero3DScene,
   Terminal,
   Preloader,
   Resume,
-  Blog
+  Blog,
+  StatsBar
 };

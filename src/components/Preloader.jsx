@@ -1,81 +1,92 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
 
-const Preloader = ({ onComplete }) => {
-  const [lines, setLines] = useState([]);
-  const [progress, setProgress] = useState(0);
+const BOOT_LINES = [
+  { text: '> initializing gourav.dev...', delay: 0, suffix: ' [OK]', suffixColor: '#00FF9D' },
+  { text: '> loading neural networks......', delay: 400, suffix: ' [OK]', suffixColor: '#00FF9D' },
+  { text: '> mounting AI/ML systems.......', delay: 800, suffix: ' [OK]', suffixColor: '#00FF9D' },
+  { text: '> compiling 3+ years experience', delay: 1200, suffix: ' [OK]', suffixColor: '#00FF9D' },
+  { text: '> calibrating intelligence.....', delay: 1600, suffix: ' [OK]', suffixColor: '#00FF9D' },
+  { text: '> ready.', delay: 2000, suffix: '', suffixColor: '' },
+];
 
-  const consoleLogs = [
-    { text: "> initializing gaurav.dev...", delay: 100 },
-    { text: "> loading neural networks............ [OK]", delay: 400 },
-    { text: "> mounting systems.................... [OK]", delay: 700 },
-    { text: "> calibrating intelligence............ [OK]", delay: 1000 },
-    { text: "> ready.", delay: 1300 },
-  ];
+export const Preloader = ({ onComplete }) => {
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    // Typing lines sequence
-    consoleLogs.forEach((log) => {
+    BOOT_LINES.forEach((line, i) => {
       setTimeout(() => {
-        setLines((prev) => [...prev, log.text]);
-      }, log.delay);
-    });
-
-    // Progress bar simulation
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
+        setVisibleLines(i + 1);
+        if (i === BOOT_LINES.length - 1) {
+          setTimeout(() => {
+            setDone(true);
+            onComplete();
+          }, 600);
         }
-        return prev + 5;
-      });
-    }, 60);
-
-    // Fade out and finish preloader
-    const timer = setTimeout(() => {
-      onComplete();
-    }, 1800);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
-  }, []);
+      }, line.delay);
+    });
+  }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 bg-[#020608] z-[99999] flex flex-col justify-center items-center font-mono p-6">
-      <div className="max-w-md w-full">
-        {/* Terminal Header */}
-        <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#1A2332]">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        background: '#020608',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: done ? 0 : 1,
+        transition: 'opacity 0.5s ease',
+        pointerEvents: done ? 'none' : 'all',
+      }}
+    >
+      <div
+        style={{
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: 'clamp(12px, 1.5vw, 15px)',
+          lineHeight: '2',
+          color: '#8BA3B8',
+          minWidth: '360px',
+        }}
+      >
+        {/* Terminal Header dots */}
+        <div className="flex gap-2 mb-4 pb-2 border-b border-[#1A2332]">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
           <span className="text-[#8BA3B8] text-xs ml-2">neural_terminal_boot.sh</span>
         </div>
 
-        {/* Lines */}
-        <div className="space-y-2 text-sm md:text-base min-h-[140px] text-left">
-          {lines.map((line, idx) => (
-            <div key={idx} className={line.includes("ready") ? "text-[#00FF9D] font-bold" : "text-[#F0F4F8]"}>
-              {line}
-            </div>
-          ))}
-        </div>
-
-        {/* Progress Bar Container */}
-        <div className="mt-8">
-          <div className="flex justify-between text-xs text-[#8BA3B8] mb-1">
-            <span>BOOTING SYSTEM</span>
-            <span>{progress}%</span>
+        {/* Boot Logs */}
+        {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
+            <span>{line.text}</span>
+            {line.suffix && (
+              <span style={{ color: line.suffixColor, fontWeight: 600, marginLeft: '4px' }}>
+                {line.suffix}
+              </span>
+            )}
           </div>
-          <div className="w-full bg-[#0A0F14] border border-[#1A2332] h-2 rounded-full overflow-hidden">
-            <div
-              className="bg-gradient-to-r from-[#7B2FFF] to-[#00D9FF] h-full transition-all duration-100 ease-out"
-              style={{ width: `${progress}%` }}
+        ))}
+        {visibleLines < BOOT_LINES.length && (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span>{BOOT_LINES[visibleLines]?.text.slice(0, 3)}</span>
+            <span
+              style={{
+                display: 'inline-block',
+                width: '8px',
+                height: '16px',
+                background: '#00D9FF',
+                marginLeft: '2px',
+                animation: 'blink 1s step-end infinite',
+              }}
             />
           </div>
-        </div>
+        )}
       </div>
+      <style>{`@keyframes blink { 50% { opacity: 0; } }`}</style>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import SnakeGame from "./SnakeGame";
 const Terminal = ({ isFullScreen, toggleFullScreen }) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState([
-    { type: "info", content: "Welcome to Gaurav's Portfolio Terminal v1.0.0" },
+    { type: "info", content: "Welcome to Gourav's Portfolio Terminal v1.0.0" },
     { type: "info", content: "Type 'help' to see available commands." },
   ]);
   const [isGameActive, setIsGameActive] = useState(false);
@@ -40,7 +40,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
 +*==+*+--+*==+*+++*===*=::::::--:::::-==:---:+==+*+==++=-++-
 +*==++=--+*+=+*+++--++#%*++::::::::++==---:=:+==++=-=++==+*=
 +*===*=-=+*+=+*+==::++::----=+*++=--::::::.--+===+=-=++==+*+
-+*==+*++=**+++*+=+=:+=:::::::::::-::::::.....::=+*=-=++==+*+
++*==+*+==**+++*+=+=:+=:::::::::::-::::::.....::=+*=-=++==+*+
 +*==+*+=+**+++*+=+***+-..::::-+*+:-:::...........:-=+**==+*=
 +*+=+*+==+*+=+*+=+*-.......::=+#*::.......::...:.........:-+
 +*+=+*+==+*++===::.:...:::...:.:..:...:::....::.............
@@ -50,12 +50,12 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
 ###.......::..........:::............:::-..............:::..
 %#-.......:-:..........:-::..:....::::::...............--:..`;
 
-  const NAME_ASCII = `  ________    _____   ____ _____________    _________   ____
- /  _____/   /  _  \\ |    |   \\______   \\  /  _  \\   \\ /   /
-/   \\  ___  /  /_\\  \\|    |   /|       _/ /  /_\\  \\   Y   / 
-\\    \\_\\  \\/    |    \\    |  / |    |   \\/    |    \\     /  
- \\______  /\\____|__  /______/  |____|_  /\\____|__  /\\___/   
-        \\/         \\/                 \\/         \\/         `;
+  const NAME_ASCII = `  ________  ________  ___  ___  ________  ________  ___      ___
+ /  _____/ /  __   / /  / /  / /  __   / /  __   /  \\  \\    /  /
+/   \\  ___/  /  /  / /  /_/  / /  /_/  / /  /  /  /   \\  \\  /  / 
+\\    \\_\\  \\  /_/  / /  /  /  / /  __   /  /_/  / /     \\  \\/  /  
+ \\______  /\\______/ /__/  /__/ /_/  /_/  /\\______/       \\____/   
+        \\/                               \\/                       `;
 
   const COMMANDS = {
     help: "List all available commands",
@@ -66,7 +66,6 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
     resume: "View/Download my Resume",
     linkedin: "Let's connect on LinkedIn",
     github: "Check my code",
-    twitter: "Follow my thoughts",
     email: "Send me an email",
     pitch: "My elevator pitch for you",
     color: "Change terminal color (e.g. color red, #fff)",
@@ -141,18 +140,18 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           });
           break;
         case "resume":
-          window.open("/resume.pdf", "_blank"); // Placeholder
+          window.open("/resume.pdf", "_blank");
           newOutput.push({ type: "response", content: "Opening Resume..." });
           break;
         case "email":
-          window.location.href = "mailto:gaurav@example.com";
+          window.location.href = "mailto:gaurav.upadhyay.vasudeva@gmail.com";
           newOutput.push({
             type: "response",
             content: "Opening mail client...",
           });
           break;
         case "linkedin":
-          window.open("https://linkedin.com/in/gaurav", "_blank");
+          window.open("https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4", "_blank");
           newOutput.push({ type: "response", content: "Opening LinkedIn..." });
           break;
         case "ls":
@@ -188,30 +187,28 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           newOutput.push({
             type: "response",
             content:
-              "I am Gaurav, a Full Stack Developer. I build intelligent systems.",
+              "I am Gourav Kumar Upadhyay, a Full Stack Developer & AI Engineer. I build intelligent enterprise systems.",
           });
           break;
-        case "twitter":
         case "github":
-        case "discord":
         case "repo":
           window.open("https://github.com/Poi5eN", "_blank");
           newOutput.push({
             type: "response",
-            content: `Opening ${command}...`,
+            content: `Opening github...`,
           });
           break;
         case "skills":
           newOutput.push({
             type: "response",
-            content: "React, Node.js, Three.js, Next.js, AI/ML, Python, Rust",
+            content: "Next.js, NestJS, React.js, Node.js, Python, RAG, LangChain, OpenAI API, PostgreSQL, Redis, Docker, AWS",
           });
           break;
         case "projects":
           newOutput.push({
             type: "response",
             content:
-              "Check out the Works section for my 3D portfolio projects!",
+              "Check out the Works section for my 3D portfolio projects! Highlights include: Paramount AI Claims, ChallanPay Gateway, and Bhraman Together.",
           });
           break;
         case "spotify":
@@ -320,7 +317,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
             />
           </div>
           <div className="text-[#00ff88] text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
-            gaurav@poi5en — -zsh
+            gourav@poi5en — -zsh
           </div>
         </div>
 
@@ -330,7 +327,6 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           onClick={() => inputRef.current?.focus()}
           style={{ color: textColor }}
         >
-          {/* Custom Scrollbar Styles embedded for this component */}
           <style>{`
             .custom-scrollbar::-webkit-scrollbar { width: 10px; }
             .custom-scrollbar::-webkit-scrollbar-track { bg: #0c0c0c; }
@@ -345,7 +341,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                 {TANJIRO_ASCII}
               </pre>
 
-              {/* Name ASCII - Right (Vertically Centered with decorative lines) */}
+              {/* Name ASCII - Right */}
               <div className="flex flex-col items-center justify-center gap-2">
                 <div className="w-full h-px bg-[#00ff88]/50" />
                 <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm leading-[1.1] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
@@ -365,7 +361,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                   {line.type === "command" ? (
                     <div className="mt-4 font-bold flex flex-row items-center text-white">
                       <span className="mr-2" style={{ color: textColor }}>
-                        gaurav@/poi5en:~$
+                        gourav@/poi5en:~$
                       </span>
                       <span>{line.content}</span>
                     </div>
@@ -398,7 +394,7 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
 
               <div className="flex items-center gap-2 mt-4">
                 <span className="font-bold" style={{ color: textColor }}>
-                  gaurav@/poi5en:~$
+                  gourav@/poi5en:~$
                 </span>
                 <input
                   ref={inputRef}
