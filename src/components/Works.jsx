@@ -35,7 +35,7 @@ const ProjectCard = ({
   return (
     <motion.div
       variants={fadeIn("up", "spring", index * 0.2, 0.75)}
-      className={`${flagship ? "w-full" : "w-full sm:w-[370px]"}`}
+      className={`${flagship ? "col-span-1 md:col-span-2 lg:col-span-3 w-full" : "col-span-1 w-full"}`}
     >
       <Tilt
         glareEnable={true}
@@ -204,7 +204,7 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <div className="mt-16 flex flex-wrap gap-8 justify-center">
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-items-stretch">
         {projects.map((project, index) => (
           <ProjectCard
             key={`project-${index}`}

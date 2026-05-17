@@ -180,7 +180,7 @@ const AILab = () => {
       ],
     },
     {
-      title: "5-in-1 API Gateway",
+      title: "By Lawyered",
       metric: "10min → <3sec Response",
       desc: "Unified 5+ challan provider APIs with Redis caching. Built for enterprise dashboard operations at Lawyered.",
       tech: ["Node.js", "Redis", "Prisma", "PostgreSQL", "REST"],
@@ -248,21 +248,19 @@ const AILab = () => {
       <div className="flex flex-wrap justify-center gap-4 mb-12 px-4">
         <button
           onClick={() => setActiveTab("agent")}
-          className={`px-6 py-2.5 rounded-full font-mono text-xs sm:text-sm border transition-all ${
-            activeTab === "agent"
+          className={`px-6 py-2.5 rounded-full font-mono text-xs sm:text-sm border transition-all ${activeTab === "agent"
               ? "bg-[#00D9FF]/10 border-[#00D9FF] text-[#00D9FF] shadow-[0_0_15px_rgba(0,217,255,0.2)]"
               : "border-[#1A2332] text-[#8BA3B8] hover:border-[#8BA3B8]/30"
-          }`}
+            }`}
         >
           🤖 Chat with My Agent
         </button>
         <button
           onClick={() => setActiveTab("projects")}
-          className={`px-6 py-2.5 rounded-full font-mono text-xs sm:text-sm border transition-all ${
-            activeTab === "projects"
+          className={`px-6 py-2.5 rounded-full font-mono text-xs sm:text-sm border transition-all ${activeTab === "projects"
               ? "bg-[#7B2FFF]/10 border-[#7B2FFF] text-[#7B2FFF] shadow-[0_0_15px_rgba(123,47,255,0.2)]"
               : "border-[#1A2332] text-[#8BA3B8] hover:border-[#8BA3B8]/30"
-          }`}
+            }`}
         >
           🔬 AI System Architectures
         </button>
@@ -299,11 +297,10 @@ const AILab = () => {
                     className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[80%] rounded-xl px-4 py-3 border text-left ${
-                        msg.role === "user"
+                      className={`max-w-[80%] rounded-xl px-4 py-3 border text-left ${msg.role === "user"
                           ? "bg-[#7B2FFF]/10 border-[#7B2FFF]/20 text-[#F0F4F8]"
                           : "bg-[#0A0F14] border-[#1A2332] text-[#8BA3B8]"
-                      }`}
+                        }`}
                     >
                       <div className="text-[10px] text-gray-500 mb-1">
                         {msg.role === "user" ? "USER" : "AGENT"}
