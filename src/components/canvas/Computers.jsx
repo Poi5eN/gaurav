@@ -16,11 +16,12 @@ const Computers = ({ isMobile, onOpenTerminal, isTerminalOpen }) => {
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
+        intensity={1.5}
+        color="#7B2FFF"
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={1} />
+      <pointLight intensity={1.5} color="#00D9FF" />
       <primitive
         object={computer.scene}
         scale={isMobile ? 0.7 : 0.75}

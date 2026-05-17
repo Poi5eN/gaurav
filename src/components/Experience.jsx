@@ -16,12 +16,16 @@ const ExperienceCard = ({ experience }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
-        background: "#1d1836",
+        background: "#0A0F14",
+        color: "#F0F4F8",
+        border: "1px solid #1A2332",
+        boxShadow: "none",
+        borderRadius: "16px"
       }}
-      contentArrowStyle={{ borderRight: "7px solid #232631" }}
+      contentArrowStyle={{ borderRight: "7px solid #1A2332" }}
       date={experience.date}
-      dateClassName="text-secondary"
-      iconStyle={{ background: experience.iconBg }}
+      dateClassName="text-[#8BA3B8] font-mono text-sm"
+      iconStyle={{ background: experience.iconBg, border: "2px solid #1A2332", boxShadow: "none" }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
           <img
@@ -33,20 +37,20 @@ const ExperienceCard = ({ experience }) => {
       }
     >
       <div>
-        <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
+        <h3 className="text-[#F0F4F8] font-display text-[22px] font-bold">{experience.title}</h3>
         <p
-          className="text-secondary text-[16px] font-semibold"
+          className="text-[#00D9FF] font-mono text-[14px]"
           style={{ margin: 0 }}
         >
           {experience.company_name}
         </p>
       </div>
 
-      <ul className="mt-5 list-disc ml-5 space-y-2">
+      <ul className="mt-5 list-disc ml-5 space-y-2.5">
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
+            className="text-[#8BA3B8] text-[13px] pl-1 leading-relaxed font-sans"
           >
             {point}
           </li>
@@ -58,18 +62,19 @@ const ExperienceCard = ({ experience }) => {
 
 const Experience = () => {
   return (
-    <>
+    <div className="w-full">
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-center`}>
-          What I have done so far
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#8BA3B8] text-center mb-2">
+          // Career Blueprint
         </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Work Experience.
+        <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-[#F0F4F8] text-center">
+          Work History
         </h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-[#00D9FF] to-[#7B2FFF] mx-auto mt-4 rounded-full" />
       </motion.div>
 
       <div className="mt-20 flex flex-col">
-        <VerticalTimeline>
+        <VerticalTimeline lineColor="#1A2332">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={`experience-${index}`}
@@ -78,8 +83,8 @@ const Experience = () => {
           ))}
         </VerticalTimeline>
       </div>
-    </>
+    </div>
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default SectionWrapper(Experience, "experience");

@@ -1,34 +1,31 @@
 import React from "react";
 import { styles } from "../styles";
-import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className='relative z-10 bg-primary dark:bg-dark-primary border-t border-t-[#1f1f3a] dark:border-t-gray-700'>
+    <footer className="relative z-10 bg-[#020608] border-t border-[#1A2332]">
       <div className={`${styles.paddingX} max-w-7xl mx-auto py-8 flex flex-col md:flex-row justify-between items-center gap-6`}>
         
         {/* Logo / Brand */}
-        <div className='flex flex-col items-center md:items-start'>
-          <p className='text-white dark:text-dark-text text-[18px] font-bold cursor-pointer flex'>
-            Gaurav &nbsp;
-            <span className='sm:block hidden'>| Poi5eN</span>
+        <div className="flex flex-col items-center md:items-start font-mono">
+          <p className="text-[#F0F4F8] text-[16px] font-bold cursor-pointer">
+            Gaurav <span className="text-[#00D9FF]">| Poi5eN</span>
           </p>
-          <p className='text-secondary dark:text-dark-secondary text-[14px] mt-1'>
-            Building the future, one pixel at a time.
+          <p className="text-[#8BA3B8] text-[11px] mt-1">
+            Taking AI ideas from model &rarr; product &rarr; production.
           </p>
         </div>
 
         {/* Copyright */}
-        <div className='text-secondary dark:text-dark-secondary text-[14px] text-center'>
-          &copy; {new Date().getFullYear()} All rights reserved.
+        <div className="text-[#8BA3B8] font-mono text-[11px] text-center">
+          &copy; {new Date().getFullYear()} Gaurav. All rights reserved.
         </div>
 
         {/* Social Icons */}
-        <div className='flex gap-4'>
-          <SocialIcon href="https://twitter.com" icon={<FaTwitter />} />
+        <div className="flex gap-4">
           <SocialIcon href="https://linkedin.com" icon={<FaLinkedin />} />
-          <SocialIcon href="https://github.com" icon={<FaGithub />} />
-          <SocialIcon href="https://instagram.com" icon={<FaInstagram />} />
+          <SocialIcon href="https://github.com/Poi5eN" icon={<FaGithub />} />
         </div>
       </div>
     </footer>
@@ -38,9 +35,9 @@ const Footer = () => {
 const SocialIcon = ({ href, icon }) => (
   <a
     href={href}
-    target='_blank'
-    rel='noopener noreferrer'
-    className='w-10 h-10 rounded-full bg-tertiary dark:bg-dark-tertiary flex justify-center items-center text-white dark:text-dark-text text-[20px] hover:text-[#915eff] dark:hover:text-[#915eff] hover:scale-110 transition-all duration-300 shadow-card'
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-9 h-9 rounded-xl bg-[#0A0F14] border border-[#1A2332] flex justify-center items-center text-[#8BA3B8] text-[18px] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:bg-[#00D9FF]/5 hover:scale-105 transition-all duration-300"
   >
     {icon}
   </a>

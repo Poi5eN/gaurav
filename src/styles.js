@@ -4,16 +4,16 @@ const styles = {
   padding: "sm:px-16 px-6 sm:py-16 py-10",
 
   heroHeadText:
-    "font-black text-white dark:text-dark-text lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px] mt-2",
+    "font-display font-extrabold text-[#F0F4F8] lg:text-[72px] sm:text-[52px] xs:text-[42px] text-[36px] lg:leading-[90px] mt-2",
   heroSubText:
-    "text-white-100 dark:text-dark-secondary font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px]",
+    "text-[#8BA3B8] font-mono lg:text-[24px] sm:text-[20px] xs:text-[18px] text-[15px] lg:leading-[36px]",
 
   sectionHeadText:
-    "text-white dark:text-dark-text font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
+    "text-[#F0F4F8] font-display font-bold md:text-[50px] sm:text-[40px] xs:text-[32px] text-[28px]",
   sectionHeadTextFixed:
-    "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]", // Added for fixed white text
+    "text-[#F0F4F8] font-display font-bold md:text-[50px] sm:text-[40px] xs:text-[32px] text-[28px]",
   sectionSubText:
-    "sm:text-[18px] text-[14px] text-secondary dark:text-dark-secondary uppercase tracking-wider",
+    "sm:text-[14px] text-[12px] font-mono text-[#8BA3B8] uppercase tracking-[0.2em]",
 };
 
 export { styles };

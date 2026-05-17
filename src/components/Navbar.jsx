@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../ThemeContext";
-import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { menu, close } from "../assets";
+import { Terminal as TerminalIcon, Sparkles } from "lucide-react";
 
 const Navbar = ({ onOpenTerminal }) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -14,7 +12,7 @@ const Navbar = ({ onOpenTerminal }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
+      if (scrollTop > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -27,13 +25,14 @@ const Navbar = ({ onOpenTerminal }) => {
 
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary dark:bg-dark-primary" : "bg-transparent"
-      } transition-colors duration-300`}
+      className={`w-full flex items-center py-4 fixed top-0 z-40 transition-all duration-300 ${
+        scrolled 
+          ? "bg-[#020608]/85 backdrop-blur-md border-b border-[#1A2332]/80 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.8)]" 
+          : "bg-transparent border-b border-transparent"
+      }`}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+      <div className="w-full flex justify-between items-center max-w-7xl mx-auto px-6">
+        {/* Monospace Logo */}
         <Link
           to="/"
           className="flex items-center gap-2"
@@ -42,37 +41,25 @@ const Navbar = ({ onOpenTerminal }) => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white dark:text-dark-text font-bold text-[18px] cursor-pointer flex">
-            Gaurav&nbsp;
-            <span className="sm:block hidden"> | Poi5eN</span>
-          </p>
+          <span className="font-mono text-xl font-bold bg-gradient-to-r from-[#00D9FF] to-[#7B2FFF] bg-clip-text text-transparent tracking-tighter">
+            G/
+          </span>
+          <span className="text-[#F0F4F8] font-mono text-sm tracking-wider hover:text-[#00D9FF] transition-colors">
+            Poi5eN
+          </span>
         </Link>
 
-        <div className="flex items-center gap-4 sm:gap-6">
-          {/* Terminal Toggle Button - moved before nav links */}
-          <button
-            onClick={onOpenTerminal}
-            className="hidden sm:flex group relative w-10 h-10 items-center justify-center focus:outline-none"
-            title="Open Terminal"
-          >
-            <span className="text-[#00ff88] font-mono text-xl font-bold group-hover:scale-110 transition-transform">
-              &gt;_
-            </span>
-            <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-[#00ff88] text-[10px] px-2 py-1 rounded border border-[#00ff88]/30 whitespace-nowrap z-50">
-              TERMINAL
-            </div>
-          </button>
-
-          <ul className="list-none hidden sm:flex flex-row gap-10">
+        {/* Right Side Links & CTAs */}
+        <div className="flex items-center gap-8">
+          
+          {/* Navigation Links */}
+          <ul className="list-none hidden md:flex flex-row gap-8 items-center">
             {navLinks.map((nav) => (
               <li
                 key={nav.id}
                 className={`${
-                  active === nav.title
-                    ? "text-white dark:text-dark-text"
-                    : "text-secondary dark:text-dark-secondary"
-                } hover:text-white dark:hover:text-dark-text text-[18px] font-medium cursor-pointer transition-colors duration-300`}
+                  active === nav.title ? "text-[#00D9FF]" : "text-[#8BA3B8]"
+                } hover:text-[#F0F4F8] font-mono text-xs uppercase tracking-wider cursor-pointer transition-colors duration-200`}
                 onClick={() => setActive(nav.title)}
               >
                 <a href={`#${nav.id}`}>{nav.title}</a>
@@ -80,91 +67,51 @@ const Navbar = ({ onOpenTerminal }) => {
             ))}
           </ul>
 
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="relative w-10 h-10 flex items-center justify-center focus:outline-none"
-            aria-label="Toggle theme"
-          >
-            <svg
-              className="w-6 h-6 text-white dark:text-dark-text"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          {/* Terminal & Glow CTA */}
+          <div className="hidden sm:flex items-center gap-4">
+            {/* Monospace Terminal Icon */}
+            <button
+              onClick={onOpenTerminal}
+              className="p-2 border border-[#1A2332] bg-[#0A0F14] text-[#00FF9D] rounded-xl hover:border-[#00FF9D]/40 hover:shadow-[0_0_15px_rgba(0,255,157,0.15)] transition-all font-mono text-xs flex items-center gap-1.5"
+              title="Open Shell Console"
             >
-              <g
-                className={`${
-                  theme === "light" ? "opacity-0" : "opacity-100"
-                } transition-opacity duration-500`}
-              >
-                {/* Moon Icon */}
-                <path
-                  d="M21 12.79A9 9 0 1 1 12.21 3a7 7 0 0 0 8.79 9.79z"
-                  fill="currentColor"
-                  className="transform scale-100 group-hover:scale-110 transition-transform duration-300"
-                />
-              </g>
-              <g
-                className={`${
-                  theme === "light" ? "opacity-100" : "opacity-0"
-                } transition-opacity duration-500`}
-              >
-                {/* Sun Icon */}
-                <circle cx="12" cy="12" r="5" fill="currentColor" />
-                <g className="transform group-hover:rotate-45 transition-transform duration-300">
-                  <path d="M12 1v2" stroke="currentColor" strokeWidth="2" />
-                  <path d="M12 21v2" stroke="currentColor" strokeWidth="2" />
-                  <path
-                    d="M4.22 4.22l1.42 1.42"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M18.36 18.36l1.42 1.42"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                  <path d="M1 12h2" stroke="currentColor" strokeWidth="2" />
-                  <path d="M21 12h2" stroke="currentColor" strokeWidth="2" />
-                  <path
-                    d="M4.22 19.78l1.42-1.42"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M18.36 5.64l1.42-1.42"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                </g>
-              </g>
-            </svg>
-          </button>
+              <TerminalIcon className="w-4 h-4" />
+              <span>console.sh</span>
+            </button>
 
-          {/* Mobile Menu */}
-          <div className="sm:hidden flex flex-1 justify-end items-center">
+            {/* Let's Build CTA */}
+            <a
+              href="#contact"
+              className="bg-[#020608] border border-[#00D9FF]/40 text-[#00D9FF] font-mono text-xs tracking-wider uppercase px-4 py-2 rounded-xl hover:bg-[#00D9FF]/10 hover:border-[#00D9FF] hover:shadow-[0_0_15px_rgba(0,217,255,0.3)] transition-all"
+            >
+              Let's Build &rarr;
+            </a>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden flex items-center">
             <img
               src={toggle ? close : menu}
               alt="menu"
-              className="w-[28px] h-[28px] object-contain"
+              className="w-[24px] h-[24px] object-contain cursor-pointer filter invert brightness-200"
               onClick={() => setToggle(!toggle)}
             />
+            
+            {/* Mobile Menu Dropdown */}
             <div
               className={`${
                 !toggle ? "hidden" : "flex"
-              } p-6 black-gradient dark:dark-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl transition-colors duration-300`}
+              } p-6 bg-[#0A0F14]/95 backdrop-blur-lg border border-[#1A2332] absolute top-16 right-0 mx-4 my-2 min-w-[200px] z-50 rounded-2xl flex-col gap-4 shadow-2xl animate-fade-in`}
             >
-              <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
+              <ul className="list-none flex flex-col gap-4 items-start">
                 {navLinks.map((nav) => (
                   <li
                     key={nav.id}
-                    className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                      active === nav.title
-                        ? "text-white dark:text-dark-text"
-                        : "text-secondary dark:text-dark-secondary"
-                    } transition-colors duration-300`}
+                    className={`font-mono text-xs uppercase tracking-wider cursor-pointer ${
+                      active === nav.title ? "text-[#00D9FF]" : "text-[#8BA3B8]"
+                    } hover:text-[#F0F4F8] transition-colors`}
                     onClick={() => {
-                      setToggle(!toggle);
+                      setToggle(false);
                       setActive(nav.title);
                     }}
                   >
@@ -172,8 +119,21 @@ const Navbar = ({ onOpenTerminal }) => {
                   </li>
                 ))}
               </ul>
+
+              {/* Mobile Console Button */}
+              <button
+                onClick={() => {
+                  setToggle(false);
+                  onOpenTerminal();
+                }}
+                className="w-full text-center mt-2 py-2 border border-[#1A2332] bg-[#020608] text-[#00FF9D] font-mono text-xs rounded-xl flex items-center justify-center gap-1.5"
+              >
+                <TerminalIcon className="w-3.5 h-3.5" />
+                <span>RUN CONSOLE</span>
+              </button>
             </div>
           </div>
+
         </div>
       </div>
     </nav>
