@@ -5,275 +5,314 @@ import SnakeGame from "./SnakeGame";
 const Terminal = ({ isFullScreen, toggleFullScreen }) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState([
-    { type: "info", content: "Welcome to Gourav's Portfolio Terminal v1.0.0" },
+    { type: "info", content: "Welcome to Gourav's System Terminal v3.0.0" },
+    { type: "info", content: "Active System: Bun + React SPA + SQLite Memory" },
     { type: "info", content: "Type 'help' to see available commands." },
   ]);
   const [isGameActive, setIsGameActive] = useState(false);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [textColor, setTextColor] = useState("#00ff88"); // Default green
+  const [textColor, setTextColor] = useState("#00D9FF"); // Default premium cyan
 
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
 
-  const TANJIRO_ASCII = `-=:.-=-::--:::--+###**#%#**#%%%##********=-:==:::-:.:--..--:
--=:.-=--:--..-**#%#*%%%##%%%##%##*********--==::-=:.:-:..:-:
--=:.-=-::===**#%%##%%%#%%%%%%**##%%%%%%%##*+++=++=:.:------:
--=::-=-::=+*#%%%##%%%#%%%%%##%%%%%%%%%%##*******-=:.:-----=:
--=---=-:-+#*#%%%##%%%%%%%%#%%%%%%%%%%%%%%%%##**.:-:.:--:--=:
-=+--==-:-=*#%%%%%#%%%%%#+=-:..####*==#%%%%%%%#*+-=:::=-:--=:
-=+--=+=--==*#%@@@%%**=-::....:-+###+:-*%%%%#%#**+=-::=-:-==-
-.::::==:=-*%@%%%@#---::::::::=+#########%%%##%#=-.::::......
-=====+**==*##%@@*--::::::::::-#*#:-=++*#=*%##%@%*+===+------
-############%@@%=-::::::::::::::::::::::+%%##%@@@@%%########
-*#*+*##**###%%%+-::::::::::::::=****=--::=%#%#%@%%%++**++**+
-=+=-=*+=-+++%#%+::::-+=:::::::::---::::-::*#%%%@%#=--+=:-++-
-=+=-=+=--=+*###=::==:-==-:::::::-:::::::::*%@%==@#+--+=:-++-
-=+=-=+==+*#%%#%=:-:::::--=-::::::-:---:::-#@%#--%%#+=+=:-=+-
-=+=-=+=--+*+*%%#::::::-::::-:::::=+---=*-+%@#=:-#+=--+=::=+-
-++=-=+=--=+-*%#%=::::*%%#+::::::::::::::-#+%--:=+*=--+=--++=
-++--=+=--=+=*+*%%-:==:::::::-::::::::::::-=-::=-=*=--++==++=
-++===+=--++==+*%@%-:::::::::::::::::::::::::=+=-=*=--++==++=
-=+==++=--++==+#*=*+::::::::::::::::::::::-+=++=-=+=-=++-=+*=
-=+===+=--++===+--+++::::::-:.......::::::#%=+===+*=-=++-=++=
-=+==+*+--+*===++=+*++=::::::....:::::::==%#--===+*===++=-=+=
-+*==+*+--+*==+*+++*===*=::::::--:::::-==:---:+==+*+==++=-++-
-+*==++=--+*+=+*+++--++#%*++::::::::++==---:=:+==++=-=++==+*=
-+*===*=-=+*+=+*+==::++::----=+*++=--::::::.--+===+=-=++==+*+
-+*==+*+==**+++*+=+=:+=:::::::::::-::::::.....::=+*=-=++==+*+
-+*==+*+=+**+++*+=+***+-..::::-+*+:-:::...........:-=+**==+*=
-+*+=+*+==+*+=+*+=+*-.......::=+#*::.......::...:.........:-+
-+*+=+*+==+*++===::.:...:::...:.:..:...:::....::.............
-+*+==*+**-:........::.....:::--:::-:::......::..............
-=++++#-.............::.......::::-........:-................
-+++*-......:.........::......:..........:::.............:...
-###.......::..........:::............:::-..............:::..
-%#-.......:-:..........:-::..:....::::::...............--:..`;
-
-  const NAME_ASCII = `  ________  ________  ___  ___  ________  ________  ___      ___
- /  _____/ /  __   / /  / /  / /  __   / /  __   /  \\  \\    /  /
-/   \\  ___/  /  /  / /  /_/  / /  /_/  / /  /  /  /   \\  \\  /  / 
-\\    \\_\\  \\  /_/  / /  /  /  / /  __   /  /_/  / /     \\  \\/  /  
- \\______  /\\______/ /__/  /__/ /_/  /_/  /\\______/       \\____/   
-        \\/                               \\/                       `;
-
-  const COMMANDS = {
-    help: "List all available commands",
-    about: "Everything about me",
-    projects: "View my 3D/Web projects",
-    skills: "My technical arsenal",
-    contact: "Get in touch",
-    resume: "View/Download my Resume",
-    linkedin: "Let's connect on LinkedIn",
-    github: "Check my code",
-    email: "Send me an email",
-    pitch: "My elevator pitch for you",
-    color: "Change terminal color (e.g. color red, #fff)",
-    clear: "Clear the terminal",
-    ls: "List virtual directory",
-    cd: "Change directory",
-    mkdir: "Create directory",
-    cat: "Spawn a cute cat",
-    spotify: "Current jam",
-    sudo: "Admin privileges?",
-    exit: "Exit fullscreen",
-    snake: "Play Snake Game",
-  };
-
+  // Focus input on mount/click
   useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
+    if (inputRef.current) inputRef.current.focus();
   }, [output, isGameActive]);
 
   useEffect(() => {
-    if (isFullScreen || isGameActive) {
-      inputRef.current?.focus();
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [isFullScreen, isGameActive]);
+  }, [output]);
+
+  const TANJIRO_ASCII = `      _..--""\`\`\`""--.._
+    .'                  '.
+   /   _..---""\""---.._   \\
+  |  .'   __      __   '.  |   GOURAV
+  | /    /  \\    /  \\    \\ |   KUMAR
+  | |   | () |  | () |   | |   UPADHYAY
+  | \\    \\__/    \\__/    / |
+  |  '.       __       .'  |   FULL STACK ×
+   \\   \`--..__  __..--\`   /    AI SYSTEMS
+    '.        \`\`        .'
+      \`--..__    __..--\`
+             \`\`\`
+`;
+
+  const COMMANDS = {
+    help: () => `
+Available commands:
+  about          — Who is Gourav?
+  skills         — Tech stack overview
+  experience     — Work history & timeline
+  projects       — List all 8 production projects
+  nexus          — Detailed report on flagship project
+  contact        — Fetch contact details & socials
+  resume         — Download LaTeX compiled PDF
+  github         — Open GitHub profile in a new tab
+  linkedin       — Open LinkedIn profile in a new tab
+  whoami         — Current role & active status
+  sudo hire      — 🎯 Initiate hiring sequence
+  easter         — 🥚 Show easter egg
+  snake          — 🐍 Play the terminal Snake Game!
+  clear          — Clear the terminal console
+    `,
+
+    about: () => `
+Gourav Kumar Upadhyay
+─────────────────────
+Full Stack Engineer × AI/ML Systems Builder
+3+ years experience | New Delhi, India | Remote OK
+
+"I build systems that think — not just apps that ship."
+Currently: Full Stack Developer @ India Accelerator, Gurugram
+    `,
+
+    whoami: () => `
+> Gourav Kumar Upadhyay
+> Role: Full Stack Developer @ India Accelerator
+> Focus: AI/ML Engineering (LangChain, RAG, Agents)
+> Status: 🟢 Available for AI/ML and Senior Engineering roles
+> Stack: Next.js &middot; NestJS &middot; Python &middot; LangChain &middot; OpenAI
+    `,
+
+    skills: () => `
+ENGINEERING FOUNDATION
+  Next.js / React.js    ████████████ 92%
+  TypeScript / JS       ████████████ 90%
+  NestJS / Node.js      ███████████  88%
+  PostgreSQL / Prisma   ██████████   82%
+  Redis / BullMQ        █████████    78%
+  Docker / Kubernetes   ████████     72%
+  AWS / GCP Cloud       ████████     72%
+
+AI / ML ARSENAL
+  OpenAI API / Vision   ████████████ 88%
+  LangChain Framework   ████████████ 85%
+  RAG Pipelines         ███████████  82%
+  Vector DBs            ██████████   78%
+  Prompt Engineering    ██████████   80%
+  Hugging Face          ████████     70%
+  Python (AI/ML)        ████████     72%
+    `,
+
+    experience: () => `
+WORK HISTORY
+────────────
+[2025–Now]  Full Stack Developer — India Accelerator, Gurugram
+            AI claim platform &middot; OpenAI Vision API &middot; NestJS &middot; GCP
+            Impact: ↓40% manual claim assessment time
+
+[2024–2025] Full Stack Developer — DoubleKlick Designs, New Delhi
+            Challan API gateway &middot; Redis &middot; AWS &middot; CI/CD
+            Impact: 10min → 3sec response time
+
+[2023–2024] Software Engineer — Corplyx Technologies, Noida
+            React &middot; Redux &middot; Node.js &middot; MongoDB
+            Impact: ↓30% page load time
+
+[2022–2023] Software Developer — Infotech Software Solutions, Noida
+            Microservices &middot; Backend optimization
+            Impact: ↑15% system response time
+    `,
+
+    projects: () => `
+PROJECTS
+────────
+1. NEXUS (SAAR AI)       — saarlabs.in          [FLAGSHIP]
+2. Paramount             — AI Claim Platform      [Live]
+3. ChallanPay (Lawyered) — API Gateway            [Live]
+4. Bhraman Together      — Travel Platform        [Live]
+5. RAG Knowledge Base    — Document Intelligence  [Live Demo]
+6. IA Spaces             — Coworking Platform     [Live]
+7. RukiyeZara            — Property Booking       [Live]
+8. Digital Vidya Saarthi — EdTech Platform        [Live]
+
+Type: open [project-name] to open in browser
+Example: open nexus
+    `,
+
+    nexus: () => `
+NEXUS — SAAR AI Agent Platform
+───────────────────────────────
+URL: https://saarlabs.in
+Stack: React &middot; Bun.js &middot; Hono &middot; TypeScript &middot; OpenRouter
+       SQLite &middot; Supabase pgvector &middot; HuggingFace &middot; Tavily
+
+Architecture: Custom ReAct Agent Loop
+  → Parallel tool execution
+  → LLM rotation pool (Gemini → DeepSeek → Llama)
+  → SSE streaming (tool_start/result/thinking/done)
+  → Sandboxed Bun.spawn code execution
+  → Hybrid SQLite + pgvector memory
+
+10 Agents: Voyage &middot; Broker &middot; Research &middot; Vision &middot; Legal
+           Cinema &middot; Support &middot; Tutor &middot; Medical &middot; Nexus
+
+Metrics:
+  ↑35% task accuracy  |  ↓40% perceived latency
+  0% rate-limit fails |  10 personas on one viewport
+    `,
+
+    contact: () => `
+GET IN TOUCH
+────────────
+Email:    gaurav.upadhyay.vasudeva@gmail.com
+GitHub:   github.com/Poi5eN
+LinkedIn: linkedin.com/in/gourav-kumar-upadhyay-0731b41b4
+
+Status:   🟢 Available | Response within 24h
+Location: New Delhi, India | Remote OK
+    `,
+
+    resume: () => {
+      window.open("/resume.pdf", "_blank");
+      return "↓ Requesting resume.pdf... Opened in a new window.";
+    },
+
+    github: () => {
+      window.open("https://github.com/Poi5eN", "_blank");
+      return "↗ Opening GitHub profile...";
+    },
+
+    linkedin: () => {
+      window.open("https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4", "_blank");
+      return "↗ Opening LinkedIn profile...";
+    },
+
+    'sudo hire': () => `
+🎯 Initiating Gourav hiring sequence...
+────────────────────────────────────────
+Offer template dispatched to: gaurav.upadhyay.vasudeva@gmail.com
+
+Just kidding — but let's make it a reality.
+Gourav is actively seeking advanced Full Stack & AI Engineering roles.
+Type 'contact' to get all operational details instantly.
+    `,
+
+    easter: () => `
+🥚 Easter Egg Unlocked!
+────────────────────────
+Did you know?
+The ReAct loop in NEXUS can orchestrate up to 9 parallel tool
+calls and rotate fallback LLMs before hitting context rate limits.
+
+Gemini 2.0 Flash is utilized for split-second tool reasoning.
+DeepSeek v3 is invoked for dense legal and system code reviews.
+
+Now type: sudo hire
+    `,
+  };
+
+  const handleOpenCommand = (arg) => {
+    const urls = {
+      nexus: "https://saarlabs.in",
+      paramount: "https://sage.paramountservices.co.in/",
+      lawyered: "https://lawyered.in/",
+      bhraman: "https://www.bhramantogether.com/",
+      rag: "https://rag-knowledge-basev2.streamlit.app/",
+      iaspaces: "https://iaspaces.co/",
+      rukiyezara: "https://www.rukiyezara.com/",
+      saarthi: "https://www.digitalvidyasaarthi.in/",
+    };
+    const url = urls[arg.toLowerCase()];
+    if (url) {
+      window.open(url, "_blank");
+      return `↗ Opening ${arg}...`;
+    }
+    return `Project "${arg}" not found. Type 'projects' to see all projects.`;
+  };
+
+  const executeCommand = (cmdText) => {
+    const trimmed = cmdText.trim();
+    if (!trimmed) return;
+
+    const parts = trimmed.split(" ");
+    const command = parts[0].toLowerCase();
+    const args = parts.slice(1).join(" ");
+
+    // Record history
+    setHistory((prev) => [...prev, trimmed]);
+    setHistoryIndex(-1);
+
+    // Add command echo to output
+    setOutput((prev) => [...prev, { type: "command", content: trimmed }]);
+
+    // Handle 'clear'
+    if (command === "clear") {
+      setOutput([]);
+      return;
+    }
+
+    // Handle 'snake'
+    if (command === "snake") {
+      setIsGameActive(true);
+      return;
+    }
+
+    // Handle 'open [project]'
+    if (command === "open") {
+      if (!args) {
+        setOutput((prev) => [
+          ...prev,
+          { type: "error", content: "Usage: open [project-name]. Example: open nexus" },
+        ]);
+        return;
+      }
+      const res = handleOpenCommand(args);
+      setOutput((prev) => [...prev, { type: "info", content: res }]);
+      return;
+    }
+
+    // Standard commands
+    if (COMMANDS[command]) {
+      const outputText = COMMANDS[command]();
+      setOutput((prev) => [...prev, { type: "info", content: outputText }]);
+      return;
+    }
+
+    // Multi-word exact matches (like 'sudo hire')
+    if (COMMANDS[trimmed.toLowerCase()]) {
+      const outputText = COMMANDS[trimmed.toLowerCase()]();
+      setOutput((prev) => [...prev, { type: "info", content: outputText }]);
+      return;
+    }
+
+    // Unsupported command
+    setOutput((prev) => [
+      ...prev,
+      {
+        type: "error",
+        content: `bash: command not found: ${command}. Type 'help' to check available commands.`,
+      },
+    ]);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      const commandLine = input.trim();
-      if (!commandLine) return;
-
-      const args = commandLine.split(" ");
-      const command = args[0].toLowerCase();
-
-      const newOutput = [...output, { type: "command", content: commandLine }];
-      setHistory([...history, commandLine]);
-      setHistoryIndex(-1);
-
-      switch (command) {
-        case "help":
-          newOutput.push({
-            type: "response",
-            content: Object.entries(COMMANDS).map(([cmd, desc]) => ({
-              cmd,
-              desc,
-            })),
-            isHelp: true,
-          });
-          break;
-        case "color":
-          if (args[1]) {
-            setTextColor(args[1]);
-            newOutput.push({
-              type: "response",
-              content: `Text color changed to ${args[1]}`,
-            });
-          } else {
-            newOutput.push({
-              type: "error",
-              content: "Usage: color <name|hex>",
-            });
-          }
-          break;
-        case "pitch":
-          newOutput.push({
-            type: "response",
-            content:
-              "I build scalable, AI-driven solutions that solve real problems. 3D web enthusiast with a knack for stunning UIs and robust backends. Ready to build the future? Let's talk.",
-          });
-          break;
-        case "resume":
-          window.open("/resume.pdf", "_blank");
-          newOutput.push({ type: "response", content: "Opening Resume..." });
-          break;
-        case "email":
-          window.location.href = "mailto:gaurav.upadhyay.vasudeva@gmail.com";
-          newOutput.push({
-            type: "response",
-            content: "Opening mail client...",
-          });
-          break;
-        case "linkedin":
-          window.open("https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4", "_blank");
-          newOutput.push({ type: "response", content: "Opening LinkedIn..." });
-          break;
-        case "ls":
-          newOutput.push({
-            type: "response",
-            content:
-              "projects/  skills/  resume.pdf  contact.md  secret_plans.txt",
-          });
-          break;
-        case "cd":
-          newOutput.push({
-            type: "response",
-            content: args[1]
-              ? `Changed directory to ${args[1]} (virtual)`
-              : "Please specify a directory.",
-          });
-          break;
-        case "mkdir":
-          newOutput.push({
-            type: "response",
-            content: args[1]
-              ? `Created directory ${args[1]}`
-              : "Usage: mkdir <directory>",
-          });
-          break;
-        case "cat":
-          newOutput.push({
-            type: "image",
-            content: "https://cataas.com/cat/cute?width=300",
-          });
-          break;
-        case "about":
-          newOutput.push({
-            type: "response",
-            content:
-              "I am Gourav Kumar Upadhyay, a Full Stack Developer & AI Engineer. I build intelligent enterprise systems.",
-          });
-          break;
-        case "github":
-        case "repo":
-          window.open("https://github.com/Poi5eN", "_blank");
-          newOutput.push({
-            type: "response",
-            content: `Opening github...`,
-          });
-          break;
-        case "skills":
-          newOutput.push({
-            type: "response",
-            content: "Next.js, NestJS, React.js, Node.js, Python, RAG, LangChain, OpenAI API, PostgreSQL, Redis, Docker, AWS",
-          });
-          break;
-        case "projects":
-          newOutput.push({
-            type: "response",
-            content:
-              "Check out the Works section for my 3D portfolio projects! Highlights include: Paramount AI Claims, ChallanPay Gateway, and Bhraman Together.",
-          });
-          break;
-        case "spotify":
-          newOutput.push({
-            type: "response",
-            content: "Now Playing: 'Never Gonna Give You Up' - Rick Astley 🎵",
-          });
-          break;
-        case "sudo":
-          newOutput.push({
-            type: "error",
-            content:
-              "Permission denied: user is not in the sudoers file. Are you a root user?",
-          });
-          break;
-        case "clear":
-          setOutput([]);
-          setInput("");
-          return;
-        case "snake":
-          setIsGameActive(true);
-          setInput("");
-          return;
-        case "exit":
-          if (isFullScreen && toggleFullScreen) toggleFullScreen();
-          newOutput.push({
-            type: "response",
-            content: isFullScreen
-              ? "Exiting fullscreen..."
-              : "Already in embedded mode.",
-          });
-          break;
-        default:
-          newOutput.push({
-            type: "error",
-            content: `Command not found: ${command}. Type 'help' for list.`,
-          });
-      }
-
-      setOutput(newOutput);
+      executeCommand(input);
       setInput("");
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (history.length > 0) {
-        const newIndex =
-          historyIndex === -1
-            ? history.length - 1
-            : Math.max(0, historyIndex - 1);
-        setHistoryIndex(newIndex);
-        setInput(history[newIndex]);
+        const nextIndex = historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1);
+        setHistoryIndex(nextIndex);
+        setInput(history[nextIndex]);
       }
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      if (historyIndex !== -1) {
-        const newIndex = Math.min(history.length - 1, historyIndex + 1);
-        setHistoryIndex(newIndex);
-        setInput(history[newIndex]);
-      }
-    } else if (e.key === "Tab") {
-      e.preventDefault();
-      const matches = Object.keys(COMMANDS).filter((cmd) =>
-        cmd.startsWith(input)
-      );
-      if (matches.length === 1) {
-        setInput(matches[0]);
+      if (history.length > 0 && historyIndex !== -1) {
+        const nextIndex = historyIndex + 1;
+        if (nextIndex >= history.length) {
+          setHistoryIndex(-1);
+          setInput("");
+        } else {
+          setHistoryIndex(nextIndex);
+          setInput(history[nextIndex]);
+        }
       }
     } else if (e.key === "Escape") {
       setInput("");
@@ -284,71 +323,54 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
     setIsGameActive(false);
     setOutput((prev) => [
       ...prev,
-      { type: "info", content: "Game Over. Returned to terminal." },
+      { type: "info", content: "Snake game exited. Type 'snake' to play again." },
     ]);
   };
 
-  const containerClasses = isFullScreen
-    ? "fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
-    : "relative w-full max-w-4xl mx-auto my-12 px-4";
-
-  const windowClasses = isFullScreen
-    ? "w-full max-w-5xl h-[85vh]"
-    : "w-full h-[500px] shadow-[0_0_50px_rgba(0,0,0,0.5)]";
+  if (!isFullScreen) return null;
 
   return (
-    <motion.div layout className={containerClasses}>
-      <div
-        className={`${windowClasses} bg-[#0c0c0c] flex flex-col rounded-xl overflow-hidden border border-[#333] shadow-2xl font-mono text-sm sm:text-base transition-all duration-300 relative group`}
-      >
-        {/* Terminal Header */}
-        <div className="bg-[#1a1a1a] px-4 py-3 flex items-center justify-between border-b border-[#333]">
-          <div className="flex gap-2 group-hover:opacity-100 opacity-50 transition-opacity duration-300">
-            <div
-              className="w-3 h-3 rounded-full bg-[#ff5f56]"
-              onClick={() => isFullScreen && toggleFullScreen()}
-              title="Close"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#020608]/90 backdrop-blur-md"
+    >
+      <div className="w-full max-w-3xl h-[80vh] flex flex-col bg-[#0A0F14] border border-[#1A2332] rounded-2xl overflow-hidden shadow-[0_24px_80px_rgba(0,217,255,0.12)] font-mono text-sm">
+        
+        {/* Title bar */}
+        <div className="bg-[#0F1923] px-5 py-3.5 flex items-center gap-2 border-b border-[#1A2332]">
+          <div className="flex items-center gap-2">
+            {/* Functional dots */}
+            <span
+              onClick={toggleFullScreen}
+              className="w-3.5 h-3.5 rounded-full bg-[#FF5F57] hover:bg-[#FF5F57]/80 cursor-pointer transition-colors"
+              title="Close Terminal"
             />
-            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-            <div
-              className="w-3 h-3 rounded-full bg-[#27c93f]"
-              onClick={() => !isFullScreen && toggleFullScreen()}
-              title="Maximize"
+            <span
+              onClick={toggleFullScreen}
+              className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] hover:bg-[#FFBD2E]/80 cursor-pointer transition-colors"
+              title="Minimize"
+            />
+            <span
+              onClick={toggleFullScreen}
+              className="w-3.5 h-3.5 rounded-full bg-[#28CA41] hover:bg-[#28CA41]/80 cursor-pointer transition-colors"
+              title="Fullscreen"
             />
           </div>
-          <div className="text-[#00ff88] text-xs font-medium tracking-wide font-sans select-none absolute left-1/2 transform -translate-x-1/2">
-            gourav@poi5en — -zsh
-          </div>
+          <span className="mx-auto text-xs text-[#4A6580] tracking-wider select-none">
+            gourav@nexus: ~
+          </span>
         </div>
 
-        {/* Terminal Body */}
-        <div
-          className="flex-1 p-6 overflow-y-auto overflow-x-hidden font-mono custom-scrollbar selection:bg-[#333] selection:text-white"
-          onClick={() => inputRef.current?.focus()}
-          style={{ color: textColor }}
-        >
-          <style>{`
-            .custom-scrollbar::-webkit-scrollbar { width: 10px; }
-            .custom-scrollbar::-webkit-scrollbar-track { bg: #0c0c0c; }
-            .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #333; border: 2px solid #0c0c0c; }
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #555; }
-          `}</style>
-
+        {/* Console logs */}
+        <div className="flex-1 p-6 overflow-y-auto custom-scrollbar bg-[#030608]/80 text-[#8BA3B8] leading-relaxed">
+          {/* Tanjiro Block Header */}
           {!isGameActive && (
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-8 items-center justify-center">
-              {/* Tanjiro ASCII - Left */}
-              <pre className="text-[4px] xs:text-[5px] sm:text-[6px] leading-[0.8] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
+            <div className="mb-6 text-left select-none">
+              <pre className="text-[#00D9FF] font-mono text-[9px] sm:text-[10px] leading-tight whitespace-pre">
                 {TANJIRO_ASCII}
               </pre>
-
-              {/* Name ASCII - Right */}
-              <div className="flex flex-col items-center justify-center gap-2">
-                <div className="w-full h-px bg-[#00ff88]/50" />
-                <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm leading-[1.1] text-[#00ff88] font-bold select-none opacity-90 whitespace-pre">
-                  {NAME_ASCII}
-                </pre>
-                <div className="w-full h-px bg-[#00ff88]/50" />
-              </div>
             </div>
           )}
 
@@ -357,44 +379,29 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
           ) : (
             <>
               {output.map((line, i) => (
-                <div key={i} className="mb-1 leading-relaxed break-words">
+                <div key={i} className="mb-2.5 break-words">
                   {line.type === "command" ? (
-                    <div className="mt-4 font-bold flex flex-row items-center text-white">
-                      <span className="mr-2" style={{ color: textColor }}>
-                        gourav@/poi5en:~$
+                    <div className="mt-4 font-bold flex items-center text-white">
+                      <span className="mr-2 text-[#00D9FF]">
+                        gourav@nexus:~$
                       </span>
                       <span>{line.content}</span>
                     </div>
                   ) : line.type === "error" ? (
-                    <div className="text-red-400 opacity-90">
+                    <div className="text-[#FF6B6B] font-bold">
                       {line.content}
                     </div>
-                  ) : line.type === "image" ? (
-                    <img
-                      src={line.content}
-                      alt="content"
-                      className="w-64 h-auto rounded-md my-2"
-                    />
-                  ) : line.isHelp ? (
-                    <div className="grid grid-cols-[100px_1fr] md:grid-cols-[150px_1fr] gap-x-4 gap-y-1 mt-2 text-sm text-gray-300">
-                      {line.content.map(({ cmd, desc }, idx) => (
-                        <React.Fragment key={idx}>
-                          <div style={{ color: textColor }}>{cmd}</div>
-                          <div className="opacity-80">{desc}</div>
-                        </React.Fragment>
-                      ))}
-                    </div>
                   ) : (
-                    <div className="text-gray-300 opacity-90 whitespace-pre-wrap">
+                    <div className="whitespace-pre-wrap text-[#F0F4F8]/90">
                       {line.content}
                     </div>
                   )}
                 </div>
               ))}
 
-              <div className="flex items-center gap-2 mt-4">
-                <span className="font-bold" style={{ color: textColor }}>
-                  gourav@/poi5en:~$
+              <div className="flex items-center gap-2 mt-5">
+                <span className="font-bold text-[#00D9FF] select-none">
+                  gourav@nexus:~$
                 </span>
                 <input
                   ref={inputRef}
@@ -402,20 +409,22 @@ const Terminal = ({ isFullScreen, toggleFullScreen }) => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="bg-transparent border-none outline-none flex-1 text-white caret-gray-400 font-bold"
+                  className="bg-transparent border-none outline-none flex-1 text-white font-bold caret-gray-400"
                   autoComplete="off"
                   spellCheck="false"
+                  placeholder="Type a command..."
                 />
               </div>
+              <div ref={bottomRef} />
             </>
           )}
         </div>
 
-        {/* Fixed Bottom Hints */}
-        <div className="bg-[#1a1a1a] px-4 py-1 flex items-center gap-4 text-[10px] text-gray-500 font-mono border-t border-[#333] select-none">
-          <span>[Tab] Auto-complete</span>
+        {/* Keyboard hints footer */}
+        <div className="bg-[#0F1923] px-5 py-2.5 flex items-center gap-4 text-[10px] text-[#4A6580] font-mono border-t border-[#1A2332] select-none">
           <span>[Esc] Clear</span>
           <span>[↑][↓] History</span>
+          <span>[Close via red dot]</span>
         </div>
       </div>
     </motion.div>

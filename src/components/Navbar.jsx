@@ -69,14 +69,16 @@ const Navbar = ({ onOpenTerminal }) => {
 
           {/* Terminal & Glow CTA */}
           <div className="hidden sm:flex items-center gap-4">
-            {/* Monospace Terminal Icon */}
             <button
               onClick={onOpenTerminal}
-              className="p-2 border border-[#1A2332] bg-[#0A0F14] text-[#00FF9D] rounded-xl hover:border-[#00FF9D]/40 hover:shadow-[0_0_15px_rgba(0,255,157,0.15)] transition-all font-mono text-xs flex items-center gap-1.5"
-              title="Open Shell Console"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-transparent border border-[#1A2332] rounded-lg text-[#8BA3B8] font-mono text-[12px] hover:border-[#00D9FF] hover:text-[#00D9FF] transition-all cursor-pointer"
             >
-              <TerminalIcon className="w-4 h-4" />
-              <span>console.sh</span>
+              <span className="flex gap-1 items-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#28CA41]" />
+              </span>
+              <span>terminal</span>
             </button>
 
             {/* Let's Build CTA */}

@@ -1,12 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  IconTerminal,
+  IconSparkles,
+  IconSend,
+  IconRefresh,
+  IconLayersIntersect,
+  IconCpu,
+  IconCircleCheck,
+  IconExternalLink,
+  IconGitBranch,
+} from "@tabler/icons-react";
 import { SectionWrapper } from "../hoc";
-import { Terminal as TerminalIcon, Sparkles, Send, RefreshCw, Layers, Cpu, CheckCircle, ExternalLink, GitBranch } from "lucide-react";
 
 const AILab = () => {
   const [activeTab, setActiveTab] = useState("agent"); // "agent" or "projects"
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "System online. Ask me anything about Gourav's skills, experience, or projects." }
+    {
+      role: "assistant",
+      content: "Secure neural link active. Ask me anything about Gourav's systems, expertise, or background.",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -14,66 +27,88 @@ const AILab = () => {
   const [showArchModal, setShowArchModal] = useState(false);
   const [githubActivity, setGithubActivity] = useState(null);
 
+  const chatBottomRef = useRef(null);
+
+  // Auto-scroll chat to bottom
+  useEffect(() => {
+    if (chatBottomRef.current) {
+      chatBottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isTyping]);
+
   useEffect(() => {
     // Fetch GitHub events
     fetch("https://api.github.com/users/Poi5eN/events?per_page=5")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (Array.isArray(data)) {
-          const pushEvent = data.find(event => event.type === "PushEvent");
+          const pushEvent = data.find((event) => event.type === "PushEvent");
           if (pushEvent) {
             const repoName = pushEvent.repo.name.replace("Poi5eN/", "");
-            const commitMessage = pushEvent.payload.commits?.[0]?.message || "Code updates";
+            const commitMessage = pushEvent.payload.commits?.[0]?.message || "Refactoring systems";
             const dateStr = new Date(pushEvent.created_at).toLocaleDateString(undefined, {
-              month: 'short',
-              day: 'numeric'
+              month: "short",
+              day: "numeric",
             });
             setGithubActivity({ repoName, commitMessage, dateStr });
           }
         }
       })
-      .catch(err => console.log("GitHub activity fetch error:", err));
+      .catch((err) => console.log("GitHub activity fetch error:", err));
   }, []);
 
   const suggestions = [
     "What is Gourav's experience with LLMs?",
     "Can Gourav take a model into production?",
-    "Tell me about his full-stack expertise."
+    "Tell me about his full-stack expertise.",
   ];
 
-  const gauravQA = [
+  // Local fallback response simulator in case the Netlify function is not configured
+  const localGauravQA = [
     {
-      keywords: ["llm", "large language model", "claude", "gpt"],
-      answer: "Gourav has extensive experience building with LLMs. He specializes in setting up orchestrators, prompt engineering, agentic planning, and RAG pipelines using LangChain, OpenAI, and Anthropic APIs. He builds full-fledged applications around models, not just simple API calls."
+      keywords: ["llm", "large language model", "claude", "gpt", "model"],
+      answer: "Gourav has extensive experience building with LLMs. He specializes in setting up prompt engineers, ReAct agent loop frameworks, vector indexing, and hybrid RAG pipelines using LangChain, OpenAI, and OpenRouter APIs.",
     },
     {
-      keywords: ["production", "deploy", "scale", "infrastructure"],
-      answer: "Absolutely. Gourav excels at LLMOps and full-stack deployment. He has built Docker containers, hosted vector database search clusters, and deployed production-ready applications utilizing AWS and Next.js, maintaining strict latency standards."
+      keywords: ["production", "deploy", "scale", "infrastructure", "aws", "gcp"],
+      answer: "Absolutely. Gourav excels at full-stack deployment and scaling. At India Accelerator, he deployed custom AI assessment engines using NestJS & GCP. He is highly proficient with Docker containers, Redis, BullMQ, and serverless workflows.",
     },
     {
-      keywords: ["full-stack", "react", "next.js", "frontend", "backend"],
-      answer: "Gourav has spent years developing robust full-stack software. His stack includes React, Next.js, Node.js, and TypeScript, backed by PostgreSQL or MongoDB. He creates ultra-responsive, beautiful glassmorphic frontends matched with robust background workers."
+      keywords: ["full-stack", "react", "next.js", "frontend", "backend", "typescript"],
+      answer: "Gourav has spent years developing robust full-stack software. His primary stacks are Next.js, React, NestJS, and TypeScript, backed by PostgreSQL, Supabase, or MongoDB. He creates responsive frontends and robust background workers.",
     },
     {
-      keywords: ["resume", "experience", "background"],
-      answer: "Gourav is a Full Stack Engineer transitioning to AI/ML. He bridges the gap between raw models and fully operational products. You can download his detailed resume in the section below or view his roles in the experience timeline!"
+      keywords: ["resume", "experience", "background", "work", "education"],
+      answer: "Gourav is a Full Stack Developer & AI Systems Builder. He currently works at India Accelerator, sector 28 Gurugram, building enterprise claims platforms. He is actively available for Senior Engineering and AI/ML roles.",
+    },
+  ];
+
+  const getLocalResponse = (query) => {
+    const promptLower = query.toLowerCase();
+    for (const item of localGauravQA) {
+      if (item.keywords.some((keyword) => promptLower.includes(keyword))) {
+        return item.answer;
+      }
     }
-  ];
+    return "I queried Gourav's knowledge base vector stores but couldn't find an exact match. Try asking about his 'LLM experience', 'production deployments', or 'full-stack expertise'!";
+  };
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     const prompt = textToSend || input;
     if (!prompt.trim()) return;
 
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: prompt }]);
+    const updatedMessages = [...messages, { role: "user", content: prompt }];
+    setMessages(updatedMessages);
     setIsTyping(true);
     setTypingSteps([]);
 
+    // Custom cognitive step animations
     const steps = [
-      { text: "🧠 Analyzing input intent...", delay: 400 },
-      { text: "🔍 Searching vector database index...", delay: 1000 },
-      { text: "⚡ Reranking context documents...", delay: 1600 },
-      { text: "✍️ Generating final synthesis...", delay: 2200 }
+      { text: "🧠 Analyzing input query intent...", delay: 350 },
+      { text: "🔍 Querying Supabase pgvector embeddings index...", delay: 800 },
+      { text: "⚡ Reranking context chunks using OpenRouter Pool...", delay: 1300 },
+      { text: "✍️ Synthesizing response streams...", delay: 1800 },
     ];
 
     steps.forEach((step) => {
@@ -82,21 +117,39 @@ const AILab = () => {
       }, step.delay);
     });
 
-    setTimeout(() => {
-      let finalResponse = "I searched gourav.dev indexes but couldn't find an exact match. Try asking about 'LLMs', 'production deployments', or his 'full-stack expertise'!";
-      
-      const promptLower = prompt.toLowerCase();
-      for (const item of gauravQA) {
-        if (item.keywords.some(keyword => promptLower.includes(keyword))) {
-          finalResponse = item.answer;
-          break;
-        }
-      }
+    try {
+      const response = await fetch("/api/ai-lab", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: updatedMessages }),
+      });
 
-      setMessages((prev) => [...prev, { role: "assistant", content: finalResponse }]);
-      setIsTyping(false);
-      setTypingSteps([]);
-    }, 2800);
+      const data = await response.json();
+
+      setTimeout(() => {
+        if (response.ok && data.choices?.[0]?.message?.content) {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: data.choices[0].message.content },
+          ]);
+        } else {
+          // Fallback to local offline simulation
+          const localAns = getLocalResponse(prompt);
+          setMessages((prev) => [...prev, { role: "assistant", content: localAns }]);
+        }
+        setIsTyping(false);
+        setTypingSteps([]);
+      }, 2100);
+
+    } catch (err) {
+      console.warn("AI Lab API Error, falling back to local simulation.", err);
+      setTimeout(() => {
+        const localAns = getLocalResponse(prompt);
+        setMessages((prev) => [...prev, { role: "assistant", content: localAns }]);
+        setIsTyping(false);
+        setTypingSteps([]);
+      }, 2100);
+    }
   };
 
   const aiProjects = [
@@ -110,8 +163,8 @@ const AILab = () => {
         "PDF upload → Text extraction",
         "Semantic chunking & vectorizing",
         "ChromaDB local index storage",
-        "User Query → OpenAI Context Synthesis"
-      ]
+        "User Query → OpenAI Context Synthesis",
+      ],
     },
     {
       title: "AI Damage Detection Pipeline",
@@ -123,8 +176,8 @@ const AILab = () => {
         "Client Uploads Vehicle Damage Photo",
         "Image Process Gateway → Vision API",
         "Severe Damage classification algorithm",
-        "Database Field auto-population"
-      ]
+        "Database Field auto-population",
+      ],
     },
     {
       title: "5-in-1 API Gateway",
@@ -136,9 +189,9 @@ const AILab = () => {
         "Incoming Multi-provider Request",
         "Redis cache checking (sub-10ms)",
         "API calls distribution layer",
-        "Response aggregator & formatting"
-      ]
-    }
+        "Response aggregator & formatting",
+      ],
+    },
   ];
 
   return (
@@ -170,7 +223,7 @@ const AILab = () => {
         >
           <div className="flex items-center gap-3">
             <div className="p-2 bg-[#00FF9D]/10 rounded-lg text-[#00FF9D]">
-              <GitBranch className="w-4 h-4 animate-pulse" />
+              <IconGitBranch className="w-4 h-4 animate-pulse" />
             </div>
             <div className="text-left font-mono">
               <div className="text-[#00FF9D] text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5">
@@ -232,7 +285,7 @@ const AILab = () => {
                   gourav_intelligence_orchestrator v1.2
                 </span>
               </div>
-              <TerminalIcon className="text-[#8BA3B8] w-4 h-4" />
+              <IconTerminal className="text-[#8BA3B8] w-4 h-4" />
             </div>
 
             {/* Chat Body */}
@@ -261,12 +314,12 @@ const AILab = () => {
                 ))}
 
                 {isTyping && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2 text-left">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2 text-left bg-[#020608]/40 p-3 rounded-lg border border-[#1A2332]">
                     {/* Execution Pipeline Steps */}
                     <div className="text-xs text-[#00D9FF]/70 space-y-1 pl-2 border-l border-[#00D9FF]/30">
                       {typingSteps.map((step, idx) => (
                         <div key={idx} className="flex items-center gap-1.5">
-                          <CheckCircle className="w-3 h-3 text-[#00FF9D]" />
+                          <IconCircleCheck className="w-3 h-3 text-[#00FF9D]" />
                           <span>{step}</span>
                         </div>
                       ))}
@@ -280,6 +333,7 @@ const AILab = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+              <div ref={chatBottomRef} />
             </div>
 
             {/* Suggestions */}
@@ -310,9 +364,9 @@ const AILab = () => {
               <button
                 onClick={() => handleSend()}
                 disabled={isTyping || !input.trim()}
-                className="bg-[#7B2FFF] text-white p-2.5 rounded-xl hover:bg-[#7B2FFF]/80 transition-colors disabled:opacity-50 flex items-center justify-center"
+                className="bg-[#7B2FFF] text-white p-2.5 rounded-xl hover:bg-[#7B2FFF]/80 transition-colors disabled:opacity-50 flex items-center justify-center cursor-pointer"
               >
-                <Send className="w-4 h-4" />
+                <IconSend className="w-4 h-4" />
               </button>
             </div>
           </motion.div>
@@ -334,7 +388,7 @@ const AILab = () => {
                     <span className="text-[10px] font-mono font-bold text-[#00FF9D] bg-[#00FF9D]/10 px-2.5 py-1 rounded-md">
                       {proj.metric}
                     </span>
-                    <Layers className="text-[#8BA3B8] w-4 h-4 group-hover:text-[#00D9FF] transition-colors" />
+                    <IconLayersIntersect className="text-[#8BA3B8] w-4 h-4 group-hover:text-[#00D9FF] transition-colors" />
                   </div>
 
                   <h3 className="text-lg font-bold font-display text-[#F0F4F8] mb-2">
@@ -376,12 +430,12 @@ const AILab = () => {
                       className="w-full flex items-center justify-center gap-1.5 bg-[#0A0F14] border border-[#1A2332] hover:border-[#00D9FF]/40 text-[#00D9FF] text-xs font-mono py-2 rounded-xl transition-all"
                     >
                       <span>Try Live Demo</span>
-                      <ExternalLink className="w-3 h-3" />
+                      <IconExternalLink className="w-3 h-3" />
                     </a>
                   ) : (
                     <button
                       onClick={() => setShowArchModal(true)}
-                      className="w-full flex items-center justify-center gap-1.5 bg-[#7B2FFF]/10 border border-[#7B2FFF]/30 hover:border-[#7B2FFF] text-[#F0F4F8] text-xs font-mono py-2 rounded-xl transition-all"
+                      className="w-full flex items-center justify-center gap-1.5 bg-[#7B2FFF]/10 border border-[#7B2FFF]/30 hover:border-[#7B2FFF] text-[#F0F4F8] text-xs font-mono py-2 rounded-xl transition-all cursor-pointer"
                     >
                       <span>View Architecture</span>
                     </button>
@@ -396,11 +450,11 @@ const AILab = () => {
       {/* Interactive Modal for Architecture Diagram */}
       <AnimatePresence>
         {showArchModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-md flex justify-center items-center p-4"
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setShowArchModal(false);
+            }}
+            className="fixed inset-0 z-[9999] bg-[#020608]/90 backdrop-blur-md flex justify-center items-center p-4"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -448,13 +502,13 @@ const AILab = () => {
               <div className="mt-8 pt-4 border-t border-[#1A2332] flex justify-end">
                 <button
                   onClick={() => setShowArchModal(false)}
-                  className="bg-[#020608] border border-[#1A2332] hover:border-[#8BA3B8] text-[#8BA3B8] hover:text-[#F0F4F8] text-xs font-mono px-4 py-2 rounded-xl transition-all"
+                  className="bg-[#020608] border border-[#1A2332] hover:border-[#8BA3B8] text-[#8BA3B8] hover:text-[#F0F4F8] text-xs font-mono px-4 py-2 rounded-xl transition-all cursor-pointer"
                 >
                   Close Diagram
                 </button>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>

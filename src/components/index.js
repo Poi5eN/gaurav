@@ -7,6 +7,7 @@ import AILab from "./AILab";
 import Experience from "./Experience";
 import Works from "./Works";
 import Feedbacks from "./Feedbacks";
+import Certifications from "./Certifications";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import Terminal from "./Terminal";
@@ -24,6 +25,7 @@ export {
   Experience,
   Works,
   Feedbacks,
+  Certifications,
   Contact,
   CanvasLoader,
   EarthCanvas, 

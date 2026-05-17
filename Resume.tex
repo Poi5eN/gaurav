@@ -1,0 +1,222 @@
+\documentclass[a4paper,9pt]{article}
+
+\usepackage[left=0.5in,right=0.5in,top=0.22in,bottom=0.22in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\pagestyle{empty}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% ---------- SECTION STYLE ----------
+\titleformat{\section}
+{\normalsize\bfseries}
+{}
+{0em}
+{}[\vspace{0.25em}\titlerule]
+
+\titlespacing{\section}{0pt}{5pt}{2pt}
+
+% ---------- BULLET SPACING ----------
+\setlist[itemize]{
+leftmargin=14pt,
+itemsep=0pt,
+topsep=0.5pt
+}
+
+% ---------- LINK STYLE: bold italic, no brackets ----------
+\newcommand{\projlink}[1]{\,\href{#1}{\normalfont\textbf{\textit{[link]}}}}
+\newcommand{\certlink}[1]{\,\href{#1}{\normalfont\textbf{\textit{view}}}}
+
+\begin{document}
+
+%==================== HEADER ====================%
+
+\begin{center}
+
+{\LARGE \textbf{Gourav Kumar Upadhyay}} \\[3pt]
+
+{\footnotesize
+New Delhi, India
+\quad | \quad
++91 8920377548
+\quad | \quad
+\href{mailto:gaurav.upadhyay.vasudeva@gmail.com}{gaurav.upadhyay.vasudeva@gmail.com}
+}
+
+\vspace{2pt}
+
+{\footnotesize
+\href{https://itsgauravhere.netlify.app/}{\textbf{\textit{Portfolio}}}
+\quad | \quad
+\href{https://github.com/Poi5eN}{\textbf{\textit{GitHub}}}
+\quad | \quad
+\href{https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4}{\textbf{\textit{LinkedIn}}}
+}
+
+\end{center}
+
+\vspace{0.5mm}
+
+%==================== SUMMARY ====================%
+
+\section*{Professional Summary}
+
+{\footnotesize
+Full Stack Engineer with 3+ years building enterprise-grade web platforms, AI-powered applications, and cloud-native systems. Proficient in TypeScript, Node.js, Next.js, NestJS, PostgreSQL, and AI/LLM integrations including LangChain, OpenAI API, and RAG pipelines. Proven track record delivering production systems across legal-tech, insurtech, travel-tech, coworking, and edtech domains using monorepo architectures, microservices, and cloud platforms (AWS, GCP).
+}
+
+\vspace{0.5mm}
+
+%==================== EXPERIENCE ====================%
+
+\section*{Experience}
+
+{\footnotesize
+
+\textbf{India Accelerator | Full Stack Developer}
+\hfill \textbf{Jul 2025 -- Present} \\
+Sector 28, Gurugram
+
+\begin{itemize}
+\item Architected enterprise platforms including vehicle claim management, legal-tech APIs, and coworking automation using NestJS, Next.js, PostgreSQL, Redis, GCP, TurboRepo monorepo, and AI integrations.
+\item Integrated OpenAI Vision API into real-time image verification pipelines for AI-powered damage detection, reducing manual claim assessment time by $\sim$40\%.
+\item Built and deployed approval engines, operational automations, and WiFi access provisioning systems, improving platform workflow efficiency across enterprise clients.
+\end{itemize}
+
+\vspace{0.5mm}
+
+\textbf{DoubleKlick Designs | Full Stack Developer}
+\hfill \textbf{Dec 2024 -- Jul 2025} \\
+Okhla Phase-I, New Delhi
+
+\begin{itemize}
+\item Developed scalable full-stack applications using Next.js, NestJS, Prisma ORM, MongoDB, and AWS, delivering production-grade REST APIs with robust authentication and authorization flows.
+\item Unified 5+ challan provider APIs into a single optimized gateway using Redis caching, slashing response time from 10+ minutes to under 3 seconds serving 10k+ monthly requests.
+\item Implemented CI/CD pipelines and AWS deployments (EC2, S3, Lambda), improving release velocity and reducing production deployment errors by 25\%.
+\end{itemize}
+
+\vspace{0.5mm}
+
+\textbf{Corplyx Technologies Pvt. Ltd. | Software Engineer}
+\hfill \textbf{Jun 2023 -- Nov 2024} \\
+Sector-62, Noida
+
+\begin{itemize}
+\item Led scalable web application development, streamlining backend query performance and frontend bundle sizes to achieve 30\% reduction in page load times across core product modules.
+\item Constructed React.js interfaces with Redux state management and connected Node.js/Express.js backends with MongoDB for high-throughput data workflows serving production users.
+\end{itemize}
+
+\vspace{0.5mm}
+
+\textbf{Infotech Software Solutions | Software Developer}
+\hfill \textbf{Sept 2022 -- Jun 2023} \\
+Sector-10, Noida
+
+\begin{itemize}
+\item Developed backend microservices, frontend components, and enhanced database workflows resulting in 15\% improvement in system response times.
+\end{itemize}
+
+}
+
+\vspace{0.5mm}
+
+%==================== SKILLS ====================%
+
+\section*{Skills}
+
+{\footnotesize
+
+\textbf{Languages:} JavaScript, TypeScript, Python, SQL, GraphQL, C++ \\
+\textbf{Frontend:} React.js, Next.js, Redux, Tailwind CSS, Material UI, Shadcn/UI \\
+\textbf{Backend:} Node.js, NestJS, Express.js, Prisma ORM, REST APIs, GraphQL APIs, WebSockets, Redis, BullMQ \\
+\textbf{AI / ML:} LangChain, OpenAI API, RAG Pipelines, Vector DBs (Pinecone, ChromaDB), Prompt Engineering, Hugging Face \\
+\textbf{Cloud / DevOps:} AWS (EC2, S3, Lambda, RDS), GCP, Docker, Kubernetes, CI/CD, Nginx, TurboRepo, Monorepo \\
+\textbf{Databases:} PostgreSQL, MongoDB, MySQL, Redis, Firebase, Supabase, Pinecone
+
+}
+
+\vspace{0.5mm}
+
+%==================== PROJECTS ====================%
+
+\section*{Projects}
+
+{\footnotesize
+
+\textbf{Paramount}\projlink{https://sage.paramountservices.co.in/}
+\hfill Next.js, NestJS, PostgreSQL, OpenAI Vision API \\
+AI-powered vehicle claim management platform with insurance integrations, real-time image-based damage detection, automated approval workflows, and multi-role access control.
+
+\vspace{0.3mm}
+
+\textbf{Bhraman Together}\projlink{https://www.bhramantogether.com/}
+\hfill NestJS, Next.js, MongoDB, AWS RDS, Google Maps API \\
+End-to-end travel and destination booking platform with cab booking, geospatial search via MongoDB geospatial queries, Google Maps route planning, and real-time availability workflows.
+
+\vspace{0.3mm}
+
+\textbf{Lawyered -- ChallanPay}\projlink{https://lawyered.in/}
+\hfill Node.js, Prisma ORM, PostgreSQL, Redis \\
+Legal-tech platform consolidating 5+ challan provider APIs into a single gateway; Redis caching reduced response time from 10 min to $<$3 sec for 10k+ monthly requests.
+
+\vspace{0.3mm}
+
+\textbf{RAG Knowledge Base}\projlink{https://rag-knowledge-basev2.streamlit.app/}
+\hfill Python, LangChain, OpenAI API, ChromaDB, Streamlit \\
+AI-powered PDF conversational platform using Retrieval-Augmented Generation for semantic search, contextual Q\&A, and LLM-grounded document intelligence.
+
+\vspace{0.3mm}
+
+\textbf{IA Spaces Coworking}\projlink{https://iaspaces.co/}
+\hfill NestJS, Next.js, PostgreSQL \\
+Coworking management platform with WiFi access automation, seat booking workflows, and enterprise approval integrations.
+
+\vspace{0.3mm}
+
+\textbf{Digital Vidya Saarthi}\projlink{https://www.digitalvidyasaarthi.in/}
+\hfill MERN, Redux \\
+School management system with attendance tracking, enrollment workflows, and parent-teacher communication modules.
+
+\vspace{0.3mm}
+
+\textbf{RukiyeZara}\projlink{https://www.rukiyezara.com/}
+\hfill Next.js, TypeScript, Supabase \\
+Scalable property booking platform with geolocation search, booking workflows, and optimized frontend performance achieving sub-2s load times.
+
+}
+
+\vspace{0.5mm}
+
+%==================== EDUCATION ====================%
+
+\section*{Education}
+
+{\footnotesize
+
+\textbf{Greater Noida Institute of Technology}
+\hfill Greater Noida \\
+Bachelor of Technology, Computer Science
+\hfill \textbf{Jul 2018 -- Jun 2022}
+
+}
+
+\vspace{0.5mm}
+
+%==================== CERTIFICATIONS ====================%
+
+\section*{Certifications}
+
+{\footnotesize
+\begin{itemize}
+\item Software Engineering Certification -- FreeCodeCamp\certlink{https://freecodecamp.org/certification/poi5en/responsive-web-design}
+\item Data Science Certification -- Kaggle\certlink{https://www.kaggle.com/learn/certification/poi5en/intro-to-machine-learning}
+\item The AI Engineer Path -- Scrimba\certlink{https://scrimba.com/@Poi5eN:certs;cert24zAwJ77fGRrQpDhLX2CWRiqLcRZxWwi6Jn34}
+\end{itemize}
+}
+
+\end{document}
