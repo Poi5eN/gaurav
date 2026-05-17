@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="relative z-10 bg-[#020608] border-t border-[#1A2332]">
       <div className={`${styles.paddingX} max-w-7xl mx-auto py-10 flex flex-col md:flex-row justify-between items-center gap-6`}>
-        
+
         {/* Logo / Brand */}
         <div className="flex flex-col items-center md:items-start font-mono">
           <p className="text-[#F0F4F8] text-[16px] font-bold">
@@ -25,24 +25,24 @@ const Footer = () => {
 
         {/* Social Icons */}
         <div className="flex gap-3">
-          <SocialIcon 
-            href="https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4" 
-            icon={<IconBrandLinkedin className="w-5 h-5" />} 
+          <SocialIcon
+            href="https://www.linkedin.com/in/gourav-kumar-upadhyay-0731b41b4"
+            icon={<IconBrandLinkedin className="w-5 h-5" />}
             hoverColor="#0077B5"
           />
-          <SocialIcon 
-            href="https://github.com/Poi5eN" 
-            icon={<IconBrandGithub className="w-5 h-5" />} 
+          <SocialIcon
+            href="https://github.com/Poi5eN"
+            icon={<IconBrandGithub className="w-5 h-5" />}
             hoverColor="#F0F4F8"
           />
-          <SocialIcon 
-            href="https://x.com" // Placeholder
-            icon={<IconBrandTwitter className="w-5 h-5" />} 
+          <SocialIcon
+            href="https://x.com/gaurv25" // Placeholder
+            icon={<IconBrandTwitter className="w-5 h-5" />}
             hoverColor="#1DA1F2"
           />
-          <SocialIcon 
-            href="https://reddit.com" // Placeholder
-            icon={<IconBrandReddit className="w-5 h-5" />} 
+          <SocialIcon
+            href="https://www.reddit.com/user/Poi5eN/" // Placeholder
+            icon={<IconBrandReddit className="w-5 h-5" />}
             hoverColor="#FF4500"
           />
         </div>
